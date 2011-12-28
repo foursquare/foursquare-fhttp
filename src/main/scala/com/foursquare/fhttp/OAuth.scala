@@ -3,38 +3,55 @@
 package com.foursquare.fhttp
 
 import com.twitter.finagle.{Service, SimpleFilter}
-import com.twitter.joauth._
 import com.twitter.util.Throw
 import org.jboss.netty.handler.codec.http._
 import scala.collection.JavaConversions._
+import javax.crypto.Mac
+import javax.crypto.SecretKey
+import javax.crypto.spec.SecretKeySpec
+import org.apache.commons.codec.binary.Base64
+
 
 case class Token(key: String, secret: String)
 
 class OAuth1Filter (scheme: String,
-                      host: String,
-                      port:Int,
-                      consumer: Token,
-                      token: Option[Token],
-                      verifier: Option[String]) extends SimpleFilter[HttpRequest, HttpResponse] {
+                    host: String,
+                    port: Int,
+                    consumer: Token,
+                    token: Option[Token],
+                    verifier: Option[String]) extends SimpleFilter[HttpRequest, HttpResponse] {
 
   def apply(request: HttpRequest, service: Service[HttpRequest, HttpResponse]) = {
+    val MAC = "HmacSHA1"
 
-    val time = System.currentTimeMillis/1000
+    
+    // Build parameters
+    val time = System.currentTimeMillis
+    var oauthParams: List[(String, String)] =
+      ("oauth_timestamp", (time / 1000).toString) ::
+      ("oauth_nonce", System.currentTimeMillis.toString) ::
+      ("oauth_version", "1.0") ::
+      ("oauth_consumer_key", consumer.key) ::
+      ("oauth_signature_method", "HMAC-SHA1") :: Nil
+    
 
-    object authParams extends OAuth1Params( token.map(_.key).getOrElse(null),
-                                            consumer.key,
-                                            System.currentTimeMillis.toString, //nonce
-                                            time,
-                                            time.toString,
-                                            null,
-                                            OAuthParams.HMAC_SHA1,
-                                            OAuthParams.ONE_DOT_OH) {
-
-      override def toList(includeSig: Boolean): List[(String, String)] = super.toList(false).filter(_._2 != null)
+    token.foreach{t =>
+      oauthParams ::= ("oauth_token", t.key)
+    }
+    
+    verifier.foreach{v =>
+      oauthParams ::= ("oauth_verifier", v)
+    }
+    
+    val portString = (port, scheme.toLowerCase) match {
+      case (80, "http") => ""
+      case (433, "https") => ""
+      case _ => ":" + port
     }
 
     val uri = new java.net.URI(request.getUri)
-    val stdParams: List[(String,String)] = {
+
+    val reqParams: List[(String,String)] = {
       val queryString = {
         if(request.getMethod == HttpMethod.GET) {
           uri.getQuery
@@ -51,25 +68,34 @@ class OAuth1Filter (scheme: String,
       }
     }
 
-    val verParams = verifier.map(v => List("oauth_verifier" -> v)).getOrElse(Nil)
-    val normStr = StandardNormalizer( scheme,
-                                      host,
-                                      port,
-                                      request.getMethod.getName,
-                                      uri.getPath,
-                                      verParams ::: stdParams,
-                                      authParams)
-    val sig = Signer()(normStr, token.map(_.secret).getOrElse(""), consumer.secret)
-    val allAuthParams = (verParams ::: (OAuthParams.OAUTH_SIGNATURE -> sig) ::authParams.toList(false))
+    val sigParams = reqParams ::: oauthParams
 
+    // Normalize
+    val normParams = percentEncode(sigParams).sortWith(_ < _).mkString("&")
+    val normUrl = (scheme + "://" + host + portString + uri.getPath).toLowerCase
+    val normReq = List(request.getMethod.getName.toUpperCase, normUrl, normParams).map(percentEncode).mkString("&")
+
+    // Sign
+    val normKey = percentEncode(consumer.secret) + "&" + token.map(t => percentEncode(t.secret)).getOrElse("")
+    val key = new SecretKeySpec(normKey.getBytes(FHttpRequest.UTF_8), MAC)
+    val mac = Mac.getInstance(MAC)
+    mac.init(key)
+    val signature: String = new String( Base64.encodeBase64(mac.doFinal(normReq.getBytes(FHttpRequest.UTF_8))), 
+                                        FHttpRequest.UTF_8)
+
+    oauthParams ::= ("oauth_signature", signature) 
+    
     // finally, add the header
     request.addHeader("Authorization", "OAuth " +
-      allAuthParams.map(p => p._1 + "=\"" + percentEncode(p._2) + "\"").mkString(","))
+      oauthParams.map(p => p._1 + "=\"" + percentEncode(p._2) + "\"").mkString(","))
 
     service(request)
   }
 
-  def percentEncode(s: String) = 
+  private def percentEncode(params: List[(String,String)]): List[String] =
+    params.map(p => percentEncode(p._1) + "=" + percentEncode(p._2))
+  
+  private def percentEncode(s: String): String =
     java.net.URLEncoder.encode(s, "utf-8").replace("+", "%20").replace("*", "%2A").replace("%7E", "~")
 }
 

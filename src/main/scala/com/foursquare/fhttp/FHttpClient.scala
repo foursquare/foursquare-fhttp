@@ -2,17 +2,19 @@
 
 package com.foursquare.fhttp
 
+import com.twitter.finagle.{Service, SimpleFilter}
 import com.twitter.finagle.builder.ClientBuilder
 import com.twitter.finagle.builder.ClientConfig.Yes
-import com.twitter.finagle.{Service, SimpleFilter}
+import com.twitter.finagle.http.Http
 import com.twitter.util.Future
 import org.jboss.netty.handler.codec.http._
 
-class FHttpClient ( val name: String,
-                          val hostPort: String, // host:port
-                          builder: ClientBuilder[HttpRequest, HttpResponse, Nothing, Yes, Yes],
-                          val logFailureEvery: Int = 0) {
 
+class FHttpClient ( val name: String,
+                    val hostPort: String, // host:port
+                    builder: ClientBuilder[HttpRequest, HttpResponse, Nothing, Yes, Yes] =
+                      ClientBuilder().codec(Http()).hostConnectionLimit(1)) {
+  
   object throwHttpErrorsFilter extends SimpleFilter[HttpRequest, HttpResponse] {
     def apply(request: HttpRequest, service: Service[HttpRequest, HttpResponse]) = {
       // flatMap asynchronously responds to requests and can "map" them to both
@@ -31,7 +33,7 @@ class FHttpClient ( val name: String,
   // hackazor!
   def scheme = if(builder.toString.contains("tls=")) "https" else "http"
 
-  def builtClient = builder.name(name).hosts(hostPort).build() 
+  def builtClient = builder.name(name).codec(Http()).hosts(hostPort).build() 
 
   val baseService = throwHttpErrorsFilter andThen builtClient
 

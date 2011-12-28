@@ -5,8 +5,8 @@ package com.foursquare.fhttp
 import com.twitter.conversions.time._
 import com.twitter.finagle.builder.{ClientBuilder, ServerBuilder}
 import com.twitter.finagle.http.Http
-import com.twitter.finagle.{Service, TimedoutRequestException}
-import com.twitter.util.{Future, TimeoutException}
+import com.twitter.finagle.{Service, TimeoutException}
+import com.twitter.util.Future
 import org.jboss.netty.channel.DefaultChannelConfig
 import org.jboss.netty.handler.codec.http._
 import org.jboss.netty.handler.codec.http.HttpResponseStatus._
@@ -54,6 +54,12 @@ class FHttpTestHelper (serverPort: Int) extends SpecsMatchers {
     def apply(request: HttpRequest) = {
       try {
         requestValidators.foreach(_(request))
+        responseTransforms ::= {
+          (r: HttpMessage) => {
+            HttpHeaders.setContentLength(r, 0)
+          }
+        }
+
       } catch {
         case exc: specification.FailureExceptionWithResult[_] => 
           responseTransforms ::= {
@@ -93,11 +99,7 @@ class FHttpClientTest extends SpecsMatchers {
   def setupHelper {
     helper = new FHttpTestHelper(PortHelper.port)
     client = new FHttpClient("test-client",
-      "localhost:" + PortHelper.port, 
-      ClientBuilder()
-      .codec(Http())
-      .hostConnectionLimit(1))
-
+      "localhost:" + PortHelper.port)
     PortHelper.port += 1
   }
 
@@ -205,8 +207,12 @@ class FHttpClientTest extends SpecsMatchers {
   @Test
   def testExceptionOnTimeout {
     helper.serverWaitMillis = 10
-    val reqTimedOut = FHttpRequest(client, "/timeout").timeout(1)
-      .get_!() must throwA[TimedoutRequestException]
+    try {
+      val reqTimedOut = FHttpRequest(client, "/timeout").timeout(1).get_!()
+    } catch {
+      case e: TimeoutException =>
+      case e => throw new RuntimeException("should have thrown a TimeoutException")
+    }
   }
 
   @Test
@@ -223,7 +229,7 @@ class FHttpClientTest extends SpecsMatchers {
   @Test
   def testFutureResult {
     var r1 = "not set"
-    var r2:Byte = 0x1
+    var r2 = -1
     FHttpRequest(client, "/future").getFuture() onSuccess {
       r => r1 = r
     } onFailure {
@@ -232,11 +238,11 @@ class FHttpClientTest extends SpecsMatchers {
     
     //asBytes
     FHttpRequest(client, "/future").getFuture(FHttpRequest.asBytes) onSuccess {
-      r => r2 = r.reduceLeft((a:Byte, b:Byte) => (a | b).toByte)
+      r => r2 = r.length
     } onFailure {
       e => throw new Exception(e)
     }
-    while( r1 == "not set" || r2 == 0x1) {
+    while( r1 == "not set" || r2 < 0) {
       Thread.sleep(10)
     }
 

@@ -16,13 +16,11 @@ You will probably want to override FHttpClient.service to add your own logging a
 
 ## OAuth Example ##
     import com.foursquare.fhttp._
-    import com.foursquare.fttp.FRequest._
-    import com.twitter.finagle.http.Http
-    import com.twitter.finagle.ClientBuilder
+    import com.foursquare.fhttp.FHttpRequest._
 
     // Create the singleton client object from a partially complete client spec
-    val client = new FHttpClient("oauth", "term.ie:80", ClientBuilder().codec(Http()).hostConnectionLimit(1))
-    val consumer = val consumer = Token("key", "secret")
+    val client = new FHttpClient("oauth", "term.ie:80")
+    val consumer = Token("key", "secret")
     
     // Get the request token
     val token = client("/oauth/example/request_token").oauth(consumer).get_!(asOAuth1Token)

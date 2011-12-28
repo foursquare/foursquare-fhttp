@@ -4,28 +4,29 @@ version := "0.1"
 
 organization := "com.foursquare"
 
-crossScalaVersions := Seq("2.8.1", "2.9.0", "2.9.0-1", "2.9.1", "2.8.0")
+crossScalaVersions := Seq("2.9.1", "2.8.1")
 
 libraryDependencies <++= (scalaVersion) { scalaVersion =>
   val specsVersion = scalaVersion match {
-    case "2.8.0" => "1.6.5"
     case "2.9.1" => "1.6.9"
     case _       => "1.6.8"
   }
-  val liftVersion = scalaVersion match {
-    case "2.9.1" => "2.4-M4"
-    case _       => "2.4-M2"
+  val finagleVersion = scalaVersion match {
+    case "2.9.1" => "1.9.11"
+    case _       => "1.9.6"
+  }
+  val finagleSuffix = scalaVersion match {
+    case "2.9.1" => "_" + scalaVersion
+    case _ => ""
   }
   Seq(
-    "com.twitter"                   %  "joauth"             % "1.9.2"             intransitive(),
-    "com.twitter"                   %  "finagle"            % "1.9.0"             intransitive(),
-    "com.twitter"                   %  "finagle-core"       % "1.9.0",
-    "com.twitter"                   %  "finagle-http"       % "1.9.0",
-    "commons-httpclient"            %  "commons-httpclient" % "3.1",
-    "junit"                         %  "junit"              % "4.5"        % "test",
-    "com.novocode"                  %  "junit-interface"    % "0.6"        % "test",
-    "org.scala-tools.testing"       %% "specs"              % specsVersion % "test",
-    "org.scala-lang"                % "scala-compiler"      % scalaVersion % "test"
+    "com.twitter"                   %  ("finagle" + finagleSuffix)      % finagleVersion intransitive(),
+    "com.twitter"                   %  ("finagle-core" + finagleSuffix) % finagleVersion,
+    "com.twitter"                   %  ("finagle-http" + finagleSuffix) % finagleVersion, 
+    "commons-httpclient"            %  "commons-httpclient"             % "3.1",
+    "junit"                         %  "junit"                          % "4.5"        % "test",
+    "com.novocode"                  %  "junit-interface"                % "0.6"        % "test",
+    "org.scala-tools.testing"       %% "specs"                          % specsVersion % "test"
   )
 }
 
@@ -37,19 +38,11 @@ publishTo <<= (version) { v =>
     Some("releases" at nexus+"releases/")
 }
 
-
-resolvers <++= (version) { v =>
-  if (v.endsWith("-SNAPSHOT"))
-    Seq(ScalaToolsSnapshots)
-  else
-    Seq()
-}
+resolvers += "twitter mvn" at "http://maven.twttr.com"
 
 scalacOptions ++= Seq("-deprecation", "-unchecked")
 
 testFrameworks += new TestFramework("com.novocode.junit.JUnitFrameworkNoMarker")
-
-defaultExcludes ~= (_ || "*~")
 
 credentials ++= {
   val scalaTools = ("Sonatype Nexus Repository Manager", "nexus.scala-tools.org")
