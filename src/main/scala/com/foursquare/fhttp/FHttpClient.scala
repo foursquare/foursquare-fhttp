@@ -33,11 +33,26 @@ class FHttpClient ( val name: String,
   // hackazor!
   def scheme = if(builder.toString.contains("tls=")) "https" else "http"
 
+  val firstHostPort = hostPort.split(",",2)(0)
+
   def builtClient = builder.name(name).codec(Http()).hosts(hostPort).build() 
 
   val baseService = throwHttpErrorsFilter andThen builtClient
 
   def service: Service[HttpRequest, HttpResponse] = baseService
+
+  def release() {
+    baseService.release()
+  }
+
+  def releaseOnShutdown(): FHttpClient = {
+    Runtime.getRuntime.addShutdownHook( new Thread() {
+      override def run() {
+        release()
+      }
+    })
+    this
+  }
 
   def uri(path: String): FHttpRequest = {
     FHttpRequest(this, path)

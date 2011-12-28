@@ -98,8 +98,7 @@ class FHttpClientTest extends SpecsMatchers {
   @Before
   def setupHelper {
     helper = new FHttpTestHelper(PortHelper.port)
-    client = new FHttpClient("test-client",
-      "localhost:" + PortHelper.port)
+    client = new FHttpClient("test-client","localhost:" + PortHelper.port)
     PortHelper.port += 1
   }
 
@@ -250,6 +249,52 @@ class FHttpClientTest extends SpecsMatchers {
     r2 must_== 0
   }
 
+  @Test
+  def testLBHostHeaderUsesFirstHost {
+    val port = client.firstHostPort.split(":",2)(1)
+    val client2 = new FHttpClient("test-client-2", "localhost:" + port + ",127.0.0.1:" + port)
+    helper.requestValidators = List(FHttpRequestValidators.matchesHeader("Host", "localhost:" + port))
+    client2("/test").get_!() must_== ""
+    client2.release()
 
-     
+    val client3 = new FHttpClient("test-client-2", "127.0.0.1:" + port + ",localhost:" + port)
+    helper.requestValidators = List(FHttpRequestValidators.matchesHeader("Host", "127.0.0.1:" + port))
+    client3("/test").get_!() must_== ""
+    client3.release()
+  }
+
+
+  @Test
+  def testOauthFlowGetPost {
+
+    def testFlow(usePost: Boolean) {
+      import com.foursquare.fhttp.FHttpRequest.asOAuth1Token
+      val clientOA = new FHttpClient("oauth", "term.ie:80")
+      val consumer = Token("key", "secret")
+
+      // Get the request token
+      val token = {
+        val tkReq = clientOA("/oauth/example/request_token").oauth(consumer)
+        if(usePost) tkReq.post_!("", asOAuth1Token) else tkReq.get_!(asOAuth1Token)
+      }
+
+      // Get the access token
+      val accessToken = {
+        val atReq = clientOA("/oauth/example/access_token").oauth(consumer, token)
+        if(usePost) atReq.post_!("", asOAuth1Token) else atReq.get_!(asOAuth1Token)
+      }
+
+      // Try some queries
+      val testParamsRes = {
+        val testReq = clientOA("/oauth/example/echo_api").params("k1"->"v1", "k2"->"v2")
+          .oauth(consumer, accessToken)
+        if(usePost) testReq.post_!() else testReq.get_!()
+      }
+      testParamsRes must_== "k1=v1&k2=v2"
+    }
+
+    testFlow(false)
+    testFlow(true)
+  }
+
 }

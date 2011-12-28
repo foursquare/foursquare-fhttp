@@ -32,7 +32,7 @@ object FHttpRequest {
              HttpMethod.GET,
              uri,
              "",
-             client.service, Nil).headers("Host" -> client.hostPort)
+             client.service, Nil).headers("Host" -> client.firstHostPort)
 
   // HttpResponse conversions
 
@@ -214,7 +214,7 @@ case class FHttpRequest ( client: FHttpClient,
     oauth(consumer, Some(token), Some(verifier))
 
   protected def oauth(consumer: Token, token: Option[Token], verifier: Option[String]): FHttpRequest = {
-    val hostPort = client.hostPort.split(":", 2) match {
+    val hostPort = client.firstHostPort.split(":", 2) match {
       case Array(k,v) => Some(k, v)
       case _ => None
     }
@@ -279,7 +279,7 @@ case class FHttpRequest ( client: FHttpClient,
     }
 
   /**
-   * Issue a non-blocking POST request
+   * Issue a blocking POST request
    * @param data The content to provide in the message
    * @param resMap A function to convert the HttpResponse to the desired response type
    */
@@ -315,7 +315,7 @@ case class FHttpRequest ( client: FHttpClient,
     }
   
   /**
-   * Issue a non-blocking POST request and throw on failure
+   * Issue a blocking POST request and throw on failure
    * @param data The content to provide in the message
    * @param resMap A function to convert the HttpResponse to the desired response type
    */
