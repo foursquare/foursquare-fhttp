@@ -413,12 +413,14 @@ case class FHttpRequest ( client: FHttpClient,
 }
 
 
-case class HttpStatusException(code: Int, reason: String) extends RuntimeException {
+case class HttpStatusException(code: Int, reason: String, response: HttpResponse) extends RuntimeException {
   var clientId = ""
   def addName(name: String) = { 
     clientId = " in " + name
     this
   }
+
+  def asString: String = FHttpRequest.asString(response)
 
   override def getMessage(): String = {
     return "HttpStatusException%s: Code: %d Reason: %s" format(clientId, code, reason)

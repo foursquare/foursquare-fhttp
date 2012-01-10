@@ -24,7 +24,7 @@ class FHttpClient ( val name: String,
           case x if (x >= 200 && x < 300) => 
             Future.value(response)
           case code => 
-            Future.exception(HttpStatusException(code, response.getStatus.getReasonPhrase).addName(name))
+            Future.exception(HttpStatusException(code, response.getStatus.getReasonPhrase, response).addName(name))
         }
       }
     }

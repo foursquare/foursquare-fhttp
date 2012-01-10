@@ -197,9 +197,13 @@ class FHttpClientTest extends SpecsMatchers {
   @Test 
   def testExceptionOnNonOKCode {
     helper.responseStatus = NOT_FOUND
-    val reqNotFound = FHttpRequest(client, "/notfound")
-      .timeout(5000).get_!() must throwA(HttpStatusException(NOT_FOUND.getCode,
-      NOT_FOUND.getReasonPhrase).addName("test-client"))
+    try {
+      val reqNotFound = FHttpRequest(client, "/notfound").timeout(5000).get_!() 
+      throw new Exception("this should not have succeeded")
+    } catch {
+      case HttpStatusException(code, reason, response) if (code == NOT_FOUND.getCode)  =>
+      case _ => throw new Exception("wrong code")
+    }
 
   }
 
