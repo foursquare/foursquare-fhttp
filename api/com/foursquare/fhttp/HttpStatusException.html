@@ -24,7 +24,7 @@
       <span class="symbol"> 
         <span class="name">HttpStatusException</span>
         
-        <span class="params">(<span name="code">code: <span name="scala.Int" class="extype">Int</span></span>, <span name="reason">reason: String</span>)</span><span class="result"> extends <span name="java.lang.RuntimeException" class="extype">RuntimeException</span> with <span name="scala.Product" class="extype">Product</span> with <span name="scala.Serializable" class="extype">Serializable</span></span>
+        <span class="params">(<span name="code">code: <span name="scala.Int" class="extype">Int</span></span>, <span name="reason">reason: String</span>, <span name="response">response: <span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span></span>)</span><span class="result"> extends <span name="java.lang.RuntimeException" class="extype">RuntimeException</span> with <span name="scala.Product" class="extype">Product</span> with <span name="scala.Serializable" class="extype">Serializable</span></span>
       </span>
       </h4>
       
@@ -63,7 +63,7 @@
       <span class="symbol"> 
         <span class="name">HttpStatusException</span>
         
-        <span class="params">(<span name="code">code: <span name="scala.Int" class="extype">Int</span></span>, <span name="reason">reason: String</span>)</span>
+        <span class="params">(<span name="code">code: <span name="scala.Int" class="extype">Int</span></span>, <span name="reason">reason: String</span>, <span name="response">response: <span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span></span>)</span>
       </span>
       </h4>
       
@@ -153,6 +153,17 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li visbl="pub" name="com.foursquare.fhttp.HttpStatusException#asString" data-isabs="false">
+      <a id="asString:String"></a>
+      <h4 class="signature">
+      <span class="kind">def</span>
+      <span class="symbol"> 
+        <span class="name">asString</span>
+        
+        <span class="result">: String</span>
+      </span>
+      </h4>
+      
     </li><li visbl="pub" name="com.foursquare.fhttp.HttpStatusException#canEqual" data-isabs="false">
       <a id="canEqual(Any):Boolean"></a>
       <h4 class="signature">
@@ -453,6 +464,17 @@
         <span class="name">reason</span>
         
         <span class="result">: String</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="com.foursquare.fhttp.HttpStatusException#response" data-isabs="false">
+      <a id="response:HttpResponse"></a>
+      <h4 class="signature">
+      <span class="kind">val</span>
+      <span class="symbol"> 
+        <span class="name">response</span>
+        
+        <span class="result">: <span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span></span>
       </span>
       </h4>
       
