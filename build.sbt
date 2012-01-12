@@ -1,6 +1,6 @@
 name := "foursquare-fhttp"
 
-version := "0.1.1"
+version := "0.1.2"
 
 organization := "com.foursquare"
 
@@ -11,18 +11,14 @@ libraryDependencies <++= (scalaVersion) { scalaVersion =>
     case "2.9.1" => "1.6.9"
     case _       => "1.6.8"
   }
-  val finagleVersion = scalaVersion match {
-    case "2.9.1" => "1.9.11"
-    case _       => "1.9.6"
-  }
   val finagleSuffix = scalaVersion match {
     case "2.9.1" => "_" + scalaVersion
     case _ => ""
   }
   Seq(
-    "com.twitter"                   %  ("finagle" + finagleSuffix)      % finagleVersion intransitive(),
-    "com.twitter"                   %  ("finagle-core" + finagleSuffix) % finagleVersion,
-    "com.twitter"                   %  ("finagle-http" + finagleSuffix) % finagleVersion, 
+    "com.twitter"                   %  ("finagle" + finagleSuffix)      % "1.9.12" intransitive(),
+    "com.twitter"                   %  ("finagle-core" + finagleSuffix) % "1.9.12",
+    "com.twitter"                   %  ("finagle-http" + finagleSuffix) % "1.9.12", 
     "commons-httpclient"            %  "commons-httpclient"             % "3.1",
     "junit"                         %  "junit"                          % "4.5"        % "test",
     "com.novocode"                  %  "junit-interface"                % "0.6"        % "test",
