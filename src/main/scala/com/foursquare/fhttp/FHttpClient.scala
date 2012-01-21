@@ -35,7 +35,7 @@ class FHttpClient ( val name: String,
 
   val firstHostPort = hostPort.split(",",2)(0)
 
-  def builtClient = builder.name(name).codec(Http()).hosts(hostPort).build() 
+  def builtClient = builder.name(name).hosts(hostPort).build()
 
   val baseService = throwHttpErrorsFilter andThen builtClient
 
