@@ -7,6 +7,7 @@ import com.twitter.finagle.{Filter, Service, SimpleFilter}
 import com.twitter.finagle.service.TimeoutFilter
 import com.twitter.util.Future
 import java.nio.charset.Charset
+import org.apache.commons.codec.binary.Base64
 import org.apache.commons.httpclient.methods.multipart._
 import org.apache.commons.httpclient.params.HttpMethodParams
 import org.jboss.netty.buffer.{ChannelBuffer, ChannelBufferInputStream, ChannelBufferOutputStream, ChannelBuffers}
@@ -162,6 +163,13 @@ case class FHttpRequest ( client: FHttpClient,
    */
   def headers(h: List[(String, String)]): FHttpRequest = 
     option((r: HttpMessage) => h.foreach(kv => r.addHeader(kv._1, kv._2)))
+
+  /**
+   * Adds a basic http auth header to the request
+   * @param user The username
+   * @param password The password
+   */
+  def auth(user: String, password: String) = headers("Authorization" -> ("Basic " + base64(user + ":" + password)))
 
   /**
    * Adds a filter to the service
@@ -409,6 +417,9 @@ case class FHttpRequest ( client: FHttpClient,
   protected def prepData(data: Array[Byte]) = {
     httpMethod(HttpMethod.POST).content(data)
   }
+  protected def base64(bytes: Array[Byte]) = new String(Base64.encodeBase64(bytes))
+
+  protected def base64(in: String): String = base64(in.getBytes(FHttpRequest.UTF_8))
 
 }
 

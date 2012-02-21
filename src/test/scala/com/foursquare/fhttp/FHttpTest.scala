@@ -128,7 +128,7 @@ class FHttpClientTest extends SpecsMatchers {
 
   @Test
   def testRequestAddHeaders {
-    helper.requestValidators = FHttpRequestValidators.matchesHeader("name", "johng") :: 
+    helper.requestValidators = FHttpRequestValidators.matchesHeader("name", "johng") ::
       FHttpRequestValidators.matchesHeader("Host", client.hostPort) :: Nil
     val req = FHttpRequest(client, "/test").headers("name"->"johng")
     val resErr = req.timeout(5000).get_!()
@@ -141,11 +141,18 @@ class FHttpClientTest extends SpecsMatchers {
     resErr2 isEmpty
 
     // adding a header with the same key appends, not replaces
-    helper.requestValidators = FHttpRequestValidators.matchesHeader("city", "ny|sf") :: 
+    helper.requestValidators = FHttpRequestValidators.matchesHeader("city", "ny|sf") ::
                               helper.requestValidators.tail
     val req3 = req2.headers("city"->"sf")
     val res3 = req3.timeout(5000).get_!()
     res3 must_== ""
+
+    // adding a header with the same key appends, not replaces
+    helper.requestValidators = FHttpRequestValidators.matchesHeader("Authorization", "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==") ::
+                              helper.requestValidators.tail
+    val req4 = req3.auth("Aladdin", "open sesame")
+    val res4 = req4.timeout(5000).get_!()
+    res4 must_== ""
   }
 
   @Test
