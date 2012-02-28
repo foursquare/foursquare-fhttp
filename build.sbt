@@ -26,13 +26,7 @@ libraryDependencies <++= (scalaVersion) { scalaVersion =>
   )
 }
 
-publishTo <<= (version) { v =>
-  val nexus = "http://nexus.scala-tools.org/content/repositories/"
-  if (v.endsWith("-SNAPSHOT"))
-    Some("snapshots" at nexus+"snapshots/")
-  else
-    Some("releases" at nexus+"releases/")
-}
+
 
 resolvers += "twitter mvn" at "http://maven.twttr.com"
 
@@ -40,12 +34,20 @@ scalacOptions ++= Seq("-deprecation", "-unchecked")
 
 testFrameworks += new TestFramework("com.novocode.junit.JUnitFrameworkNoMarker")
 
+publishTo <<= (version) { v =>
+  val nexus = "https://oss.sonatype.org/"
+  if (v.endsWith("-SNAPSHOT"))
+    Some("snapshots" at nexus+"content/repositories/snapshots/")
+  else
+    Some("releases" at nexus+"service/local/staging/deploy/maven2")
+}
+
 credentials ++= {
-  val scalaTools = ("Sonatype Nexus Repository Manager", "nexus.scala-tools.org")
+  val sonaType = ("Sonatype Nexus Repository Manager", "oss.sonatype.org")
   def loadMavenCredentials(file: java.io.File) : Seq[Credentials] = {
     xml.XML.loadFile(file) \ "servers" \ "server" map (s => {
       val host = (s \ "id").text
-      val realm = if (host == scalaTools._2) scalaTools._1 else "Unknown"
+      val realm = if (host == sonaType._2) sonaType._1 else "Unknown"
       Credentials(realm, host, (s \ "username").text, (s \ "password").text)
     })
   }
@@ -57,3 +59,33 @@ credentials ++= {
     case _ => Nil
   }
 }
+
+publishMavenStyle := true
+
+publishArtifact in Test := false
+
+pomIncludeRepository := { x => false }
+
+pomExtra := (
+<url>https://github.com/foursquare/foursquare-fhttp</url>
+<licenses>
+  <license>
+    <name>Apache 2</name>
+    <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    <distribution>repo</distribution>
+    <comments>A business-friendly OSS license</comments>
+  </license>
+</licenses>
+<scm>
+  <url>git@github.com/foursquare/foursquare-fhttp.git</url>
+  <connection>scm:git:git@github.com/foursquare/foursquare-fhttp.git</connection>
+</scm>
+<developers>
+   <developer>
+   <id>john</id>
+   <name>John Gallagher</name>
+   <email>john@foursquare.com</email>
+ </developer>
+</developers>
+)
+
