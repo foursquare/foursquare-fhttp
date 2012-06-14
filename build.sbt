@@ -1,6 +1,6 @@
 name := "foursquare-fhttp"
 
-version := "0.1.4"
+version := "0.1.5"
 
 organization := "com.foursquare"
 
@@ -16,7 +16,6 @@ libraryDependencies <++= (scalaVersion) { scalaVersion =>
     case _ => ""
   }
   Seq(
-    "com.twitter"                   %  ("finagle" + finagleSuffix)      % "1.9.12" intransitive(),
     "com.twitter"                   %  ("finagle-core" + finagleSuffix) % "1.9.12",
     "com.twitter"                   %  ("finagle-http" + finagleSuffix) % "1.9.12", 
     "commons-httpclient"            %  "commons-httpclient"             % "3.1",
