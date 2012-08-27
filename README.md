@@ -17,7 +17,7 @@ You will probably want to override FHttpClient.service to add your own logging a
 ## Adding FHttp to your build ##
 The project is cross-compiled for scala 2.8.1 and scala 2.9.1. In your build.sbt, add:
 
-    "com.foursquare" %% "foursquare-fhttp" % "0.1.5"
+    "com.foursquare" %% "foursquare-fhttp" % "0.1.5.1"
 
 
 ## Some Simple Examples ##
@@ -33,10 +33,11 @@ The project is cross-compiled for scala 2.8.1 and scala 2.9.1. In your build.sbt
 
     // or customize the ClientBuilder
     val client = new FHttpClient("test2", "localhost:80", 
-                    ClientBuilder().codec(Http(_maxRequestSize = 1024.bytes,_maxResponseSize = 1024.bytes))
-                      .hostConnectionLimit(15)
-                      .tcpConnectTimeout(30.milliseconds)
-                      .retries(0)).releaseOnShutdown()
+        ClientBuilder()
+          .codec(Http(_maxRequestSize = 1024.bytes,_maxResponseSize = 1024.bytes))
+          .hostConnectionLimit(15)
+          .tcpConnectTimeout(30.milliseconds)
+          .retries(0)).releaseOnShutdown()
 
     // add parameters
     val clientWParams = client("/path").params("msg"->"hello", "to"->"world").params(List("from"->"scala"))
@@ -72,7 +73,7 @@ The project is cross-compiled for scala 2.8.1 and scala 2.9.1. In your build.sbt
 
 
 ## Dropbox OAuth Example ##
-Here's a slightly more complicated oauth example, using a [Dropbox API](https://www.dropbox.com/developers/apps) account.
+Here's a slightly more complicated oauth (and HTTPS) example showing, using a [Dropbox API](https://www.dropbox.com/developers/apps) account.
 
     import com.foursquare.fhttp._
     import com.foursquare.fhttp.FHttpRequest._
@@ -84,12 +85,21 @@ Here's a slightly more complicated oauth example, using a [Dropbox API](https://
     // Using the App key and App Secret, fill out the consumer token here:
     val consumer = Token(dbApiKey, dbApiSecret)
 
-    val api = new FHttpClient("dropbox-api", "api.dropbox.com:443", ClientBuilder().codec(Http()).tls("api.dropbox.com").hostConnectionLimit(1).retries(0))
+    val api = new FHttpClient("dropbox-api", "api.dropbox.com:443", 
+        ClientBuilder()
+          .codec(Http())
+          .tls("api.dropbox.com")
+          .hostConnectionLimit(1)
+          .retries(0))
 
     val reqToken = api("/1/oauth/request_token").oauth(consumer).post_!("", asOAuth1Token)
 
     // Go authorize usage of the app in a web browser using this link:
-    println("go visit\n https://www.dropbox.com/1/oauth/authorize?oauth_token=%s&oauth_token_secret=%s\n and accept the app!".format(reqToken.key, reqToken.secret))
+    println("""go visit
+
+    https://www.dropbox.com/1/oauth/authorize?oauth_token=%s&oauth_token_secret=%s
+
+    and accept the app!""".format(reqToken.key, reqToken.secret))
 
 
     // wait for the app to be accepted by the user
