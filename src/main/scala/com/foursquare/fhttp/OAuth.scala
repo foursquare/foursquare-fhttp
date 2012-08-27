@@ -45,7 +45,7 @@ class OAuth1Filter (scheme: String,
     
     val portString = (port, scheme.toLowerCase) match {
       case (80, "http") => ""
-      case (433, "https") => ""
+      case (443, "https") => ""
       case _ => ":" + port
     }
 
