@@ -71,3 +71,34 @@ The project is cross-compiled for scala 2.8.1 and scala 2.9.1. In your build.sbt
     // res0: String = k1=v1&k2=v2
 
 
+## Dropbox OAuth Example ##
+Here's a slightly more complicated oauth example, using a [Dropbox API](https://www.dropbox.com/developers/apps) account.
+
+    import com.foursquare.fhttp._
+    import com.foursquare.fhttp.FHttpRequest._
+    import com.twitter.conversions.storage._
+    import com.twitter.conversions.time._
+    import com.twitter.finagle.builder.ClientBuilder
+    import com.twitter.finagle.http.Http
+
+    // Using the App key and App Secret, fill out the consumer token here:
+    val consumer = Token(dbApiKey, dbApiSecret)
+
+    val api = new FHttpClient("dropbox-api", "api.dropbox.com:443", ClientBuilder().codec(Http()).tls("api.dropbox.com").hostConnectionLimit(1).retries(0))
+
+    val reqToken = api("/1/oauth/request_token").oauth(consumer).post_!("", asOAuth1Token)
+
+    // Go authorize usage of the app in a web browser using this link:
+    println("go visit\n https://www.dropbox.com/1/oauth/authorize?oauth_token=%s&oauth_token_secret=%s\n and accept the app!".format(reqToken.key, reqToken.secret))
+
+
+    // wait for the app to be accepted by the user
+
+
+    // Finally, get the access token
+    val accessToken = api("/1/oauth/access_token").oauth(consumer, reqToken).post_!("", asOAuth1Token)
+
+
+    // and go do some stuff with it.
+    api("/1/account/info").oauth(consumer, accessToken).get_!()
+
