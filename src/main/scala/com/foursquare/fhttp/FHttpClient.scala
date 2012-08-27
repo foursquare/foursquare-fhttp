@@ -2,6 +2,7 @@
 
 package com.foursquare.fhttp
 
+import com.twitter.conversions.time._
 import com.twitter.finagle.{Service, SimpleFilter}
 import com.twitter.finagle.builder.ClientBuilder
 import com.twitter.finagle.builder.ClientConfig.Yes
@@ -13,7 +14,7 @@ import org.jboss.netty.handler.codec.http._
 class FHttpClient ( val name: String,
                     val hostPort: String, // host:port
                     builder: ClientBuilder[HttpRequest, HttpResponse, Nothing, Yes, Yes] =
-                      ClientBuilder().codec(Http()).hostConnectionLimit(1)) {
+                      ClientBuilder().codec(Http()).tcpConnectTimeout(1.second).hostConnectionLimit(1)) {
   
   object throwHttpErrorsFilter extends SimpleFilter[HttpRequest, HttpResponse] {
     def apply(request: HttpRequest, service: Service[HttpRequest, HttpResponse]) = {

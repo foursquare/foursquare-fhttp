@@ -183,7 +183,7 @@ case class FHttpRequest ( client: FHttpClient,
    * @param millis The number of milliseconds to wait
    */
   def timeout(millis: Int) = 
-    filter(new TimeoutFilter(millis.milliseconds))
+    filter(new TimeoutFilter(millis.milliseconds, FTimer.finagleTimer))
 
   /**
    * Adds a debugging filter to print the request and the response.  Can be added multiple times

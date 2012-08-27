@@ -1,31 +1,21 @@
 name := "foursquare-fhttp"
 
-version := "0.1.5.1"
+version := "0.1.6-SNAPSHOT"
 
 organization := "com.foursquare"
 
-crossScalaVersions := Seq("2.9.1", "2.8.1")
+crossScalaVersions := Seq("2.9.1", "2.9.2")
 
 libraryDependencies <++= (scalaVersion) { scalaVersion =>
-  val specsVersion = scalaVersion match {
-    case "2.9.1" => "1.6.9"
-    case _       => "1.6.8"
-  }
-  val finagleSuffix = scalaVersion match {
-    case "2.9.1" => "_" + scalaVersion
-    case _ => ""
-  }
   Seq(
-    "com.twitter"                   %  ("finagle-core" + finagleSuffix) % "1.9.12",
-    "com.twitter"                   %  ("finagle-http" + finagleSuffix) % "1.9.12", 
-    "commons-httpclient"            %  "commons-httpclient"             % "3.1",
-    "junit"                         %  "junit"                          % "4.5"        % "test",
-    "com.novocode"                  %  "junit-interface"                % "0.6"        % "test",
-    "org.scala-tools.testing"       %% "specs"                          % specsVersion % "test"
+    "com.twitter"                   %  "finagle-core"       % "5.3.9",
+    "com.twitter"                   %  "finagle-http"       % "5.3.9",
+    "commons-httpclient"            %  "commons-httpclient" % "3.1",
+    "junit"                         %  "junit"              % "4.5"        % "test",
+    "com.novocode"                  %  "junit-interface"    % "0.6"        % "test",
+    "org.scala-tools.testing"       %  "specs_2.9.1"        % "1.6.9"      % "test"
   )
 }
-
-
 
 resolvers += "twitter mvn" at "http://maven.twttr.com"
 

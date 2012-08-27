@@ -89,6 +89,7 @@ Here's a slightly more complicated oauth (and HTTPS) example showing, using a [D
         ClientBuilder()
           .codec(Http())
           .tls("api.dropbox.com")
+          .tcpConnectTimeout(1.second)
           .hostConnectionLimit(1)
           .retries(0))
 

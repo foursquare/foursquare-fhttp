@@ -83,6 +83,7 @@ class FHttpTestHelper (serverPort: Int) extends SpecsMatchers {
     .codec(Http())
     .bindTo(address)
     .name("HttpServer")
+    .maxConcurrentRequests(20)
     .build(service)
 
    
@@ -227,11 +228,21 @@ class FHttpClientTest extends SpecsMatchers {
 
   @Test
   def testFutureTimeout {
-    helper.serverWaitMillis = 10
-    FHttpRequest(client, "/future").timeout(1).getFuture() onSuccess {
-      r => throw new Exception("should have timed out but got " + r)
+    helper.serverWaitMillis = 100
+    var gotResult = false
+    val f = FHttpRequest(client, "/future0").timeout(1).getFuture() onSuccess {
+      r => gotResult = true
     } onFailure {
-      e => Unit
+      e => gotResult = true
+    }
+    while (!gotResult) {
+      Thread.sleep(10)
+    }
+    try {
+      val r = f.get
+      throw new Exception("should have timed out but got " + r)
+    } catch {
+      case _ => Unit
     }
   }
 
@@ -240,14 +251,15 @@ class FHttpClientTest extends SpecsMatchers {
   def testFutureResult {
     var r1 = "not set"
     var r2 = -1
-    FHttpRequest(client, "/future").getFuture() onSuccess {
+    FHttpRequest(client, "/future1").timeout(5000).getFuture() onSuccess {
       r => r1 = r
     } onFailure {
       e => throw new Exception(e)
     }
+
     
     //asBytes
-    FHttpRequest(client, "/future").getFuture(FHttpRequest.asBytes) onSuccess {
+    FHttpRequest(client, "/future2").timeout(5000).getFuture(FHttpRequest.asBytes) onSuccess {
       r => r2 = r.length
     } onFailure {
       e => throw new Exception(e)
@@ -277,10 +289,16 @@ class FHttpClientTest extends SpecsMatchers {
 
   @Test
   def testOauthFlowGetPost {
-
     def testFlow(usePost: Boolean) {
       import com.foursquare.fhttp.FHttpRequest.asOAuth1Token
-      val clientOA = new FHttpClient("oauth", "term.ie:80")
+      val clientOA =
+        new FHttpClient(
+          "oauth",
+          "term.ie:80",
+          (ClientBuilder()
+            .codec(Http())
+            .hostConnectionLimit(1))
+            .tcpConnectTimeout(1.seconds))
       val consumer = Token("key", "secret")
 
       // Get the request token
