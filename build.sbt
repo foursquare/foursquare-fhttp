@@ -11,8 +11,8 @@ libraryDependencies <++= (scalaVersion) { scalaVersion =>
     "com.twitter"                   %  "finagle-core"       % "5.3.9",
     "com.twitter"                   %  "finagle-http"       % "5.3.9",
     "commons-httpclient"            %  "commons-httpclient" % "3.1",
-    "junit"                         %  "junit"              % "4.5"        % "test",
-    "com.novocode"                  %  "junit-interface"    % "0.6"        % "test",
+    "junit"                         %  "junit"              % "4.10"       % "test",
+    "com.novocode"                  %  "junit-interface"    % "0.9"        % "test",
     "org.scala-tools.testing"       %  "specs_2.9.1"        % "1.6.9"      % "test"
   )
 }
