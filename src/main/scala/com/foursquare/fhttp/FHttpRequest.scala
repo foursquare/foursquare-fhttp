@@ -50,7 +50,12 @@ object FHttpRequest {
   /**
    * Extracts the contents as a byte array
    */
-  def asBytes: HttpResponse => Array[Byte] = res => res.getContent.toByteBuffer.array
+  def asBytes: HttpResponse => Array[Byte] = res => {
+    val buffer = res.getContent.toByteBuffer
+    val bytes = new Array[Byte](buffer.remaining)
+    buffer.get(bytes, buffer.arrayOffset, buffer.remaining)
+    bytes
+  }
 
   /**
    * Extracts the contents as an input stream
