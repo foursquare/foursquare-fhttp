@@ -17,7 +17,7 @@ You will probably want to override FHttpClient.service to add your own logging a
 ## Adding FHttp to your build ##
 The project is cross-compiled for scala 2.9.1 and scala 2.9.2. In your build.sbt, add:
 
-    "com.foursquare" %% "foursquare-fhttp" % "0.1.6"
+    "com.foursquare" %% "foursquare-fhttp" % "0.1.6.1"
 
 
 ## Some Simple Examples ##
