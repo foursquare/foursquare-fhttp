@@ -12,6 +12,10 @@ Like [scalaj-http](https://github.com/scalaj/scalaj-http), it supports multipart
 
 You will probably want to override FHttpClient.service to add your own logging and tracing filters.
 
+##How to Build##
+    ./sbt compile
+    ./sbt test
+
 ##[API Docs](http://foursquare.github.com/foursquare-fhttp/api/)##
 
 ## Adding FHttp to your build ##
