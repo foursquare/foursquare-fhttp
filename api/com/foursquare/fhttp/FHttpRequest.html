@@ -12,7 +12,7 @@
       <script type="text/javascript" src="../../../lib/tools.tooltip.js"></script>
     
         </head>
-        <body class="type">
+        <body onload="sh_highlightDocument('../lib/', '.min.js');" class="type">
       <div id="definition">
         <a title="Go to companion" href="FHttpRequest$.html"><img src="../../../lib/class_to_object_big.png" /></a>
         <p id="owner"><a name="com" class="extype" href="../../package.html">com</a>.<a name="com.foursquare" class="extype" href="../package.html">foursquare</a>.<a name="com.foursquare.fhttp" class="extype" href="package.html">fhttp</a></p>
@@ -20,51 +20,53 @@
       </div>
 
       <h4 class="signature" id="signature">
-      <span class="kind">case class</span>
-      <span class="symbol"> 
-        <span class="name">FHttpRequest</span>
-        
-        <span class="params">(<span name="client">client: <a name="com.foursquare.fhttp.FHttpClient" class="extype" href="FHttpClient.html">FHttpClient</a></span>, <span name="method">method: <span name="org.jboss.netty.handler.codec.http.HttpMethod" class="extype">HttpMethod</span></span>, <span name="uri">uri: String</span>, <span name="traceName">traceName: String</span>, <span name="service">service: <span name="com.twitter.finagle.Service" class="extype">Service</span>[<span name="org.jboss.netty.handler.codec.http.HttpRequest" class="extype">HttpRequest</span>, <span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>]</span>, <span name="options">options: List[HttpOption]</span>)</span><span class="result"> extends <span name="scala.Product" class="extype">Product</span> with <span name="scala.Serializable" class="extype">Serializable</span></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <span class="name">FHttpRequest</span><span class="params">(<span name="client">client: <a name="com.foursquare.fhttp.FHttpClient" class="extype" href="FHttpClient.html">FHttpClient</a></span>, <span name="uri">uri: String</span>, <span name="traceName">traceName: String</span>, <span name="service">service: <span name="com.twitter.finagle.Service" class="extype">Service</span>[<span name="org.jboss.netty.handler.codec.http.HttpRequest" class="extype">HttpRequest</span>, <span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>]</span>, <span name="options">options: List[(<span name="org.jboss.netty.handler.codec.http.HttpMessage" class="extype">HttpMessage</span>) ⇒ <span name="scala.Unit" class="extype">Unit</span>]</span>)</span><span class="result"> extends <span name="scala.Product" class="extype">Product</span> with <span name="scala.Serializable" class="extype">Serializable</span></span>
       </span>
       </h4>
       
-          <div class="fullcommenttop" id="comment"><div class="comment cmt"><p>An HTTP request
+      <div class="fullcommenttop" id="comment"><div class="comment cmt"><p>An HTTP request
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span name="scala.Serializable" class="extype">Serializable</span>, <span name="java.io.Serializable" class="extype">Serializable</span>, <span name="scala.Product" class="extype">Product</span>, <span name="scala.Equals" class="extype">Equals</span>, AnyRef, <span name="scala.Any" class="extype">Any</span></div>
         </div></div>
-        
+    
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input accesskey="/" type="text" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol><li class="alpha in"><span>Alphabetic</span></li><li class="inherit out"><span>By inheritance</span></li></ol>
+            </div>
+        <div id="ancestors">
+              <span class="filtertype">Inherited</span>
+              <ol><li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li></ol>
+              <ol id="linearization"><li name="com.foursquare.fhttp.FHttpRequest" class="in"><span>FHttpRequest</span></li><li name="scala.Serializable" class="in"><span>Serializable</span></li><li name="java.io.Serializable" class="in"><span>Serializable</span></li><li name="scala.Product" class="in"><span>Product</span></li><li name="scala.Equals" class="in"><span>Equals</span></li><li name="scala.AnyRef" class="in"><span>AnyRef</span></li><li name="scala.Any" class="in"><span>Any</span></li></ol>
+            </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
 
       <div id="template">
-
-        <div id="mbrsel">
-          <div id="textfilter"><span class="pre"></span><span class="input"><input accesskey="/" type="text" /></span><span class="post"></span></div>
-          <div id="order">
-                <span class="filtertype">Ordering</span>
-                <ol><li class="alpha in"><span>Alphabetic</span></li><li class="inherit out"><span>By inheritance</span></li></ol>
-              </div>
-          <div id="ancestors">
-                <span class="filtertype">Inherited</span>
-                <ol><li class="hideall out"><span>Hide All</span></li>
-                <li class="showall in"><span>Show all</span></li></ol>
-                <ol id="linearization"><li name="com.foursquare.fhttp.FHttpRequest" class="in"><span>FHttpRequest</span></li><li name="scala.Serializable" class="in"><span>Serializable</span></li><li name="java.io.Serializable" class="in"><span>Serializable</span></li><li name="scala.Product" class="in"><span>Product</span></li><li name="scala.Equals" class="in"><span>Equals</span></li><li name="scala.AnyRef" class="in"><span>AnyRef</span></li><li name="scala.Any" class="in"><span>Any</span></li></ol>
-              </div>
-          <div id="visbl">
-              <span class="filtertype">Visibility</span>
-              <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
-            </div>
-        </div>
-
+        <div id="allMembers">
         <div class="members" id="constructors">
               <h3>Instance Constructors</h3>
               <ol><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#this" data-isabs="false">
       <a id="this:FHttpRequest"></a>
       <h4 class="signature">
-      <span class="kind">new</span>
-      <span class="symbol"> 
-        <span class="name">FHttpRequest</span>
-        
-        <span class="params">(<span name="client">client: <a name="com.foursquare.fhttp.FHttpClient" class="extype" href="FHttpClient.html">FHttpClient</a></span>, <span name="method">method: <span name="org.jboss.netty.handler.codec.http.HttpMethod" class="extype">HttpMethod</span></span>, <span name="uri">uri: String</span>, <span name="traceName">traceName: String</span>, <span name="service">service: <span name="com.twitter.finagle.Service" class="extype">Service</span>[<span name="org.jboss.netty.handler.codec.http.HttpRequest" class="extype">HttpRequest</span>, <span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>]</span>, <span name="options">options: List[HttpOption]</span>)</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">new</span>
+      </span>
+      <span class="symbol">
+        <span class="name">FHttpRequest</span><span class="params">(<span name="client">client: <a name="com.foursquare.fhttp.FHttpClient" class="extype" href="FHttpClient.html">FHttpClient</a></span>, <span name="uri">uri: String</span>, <span name="traceName">traceName: String</span>, <span name="service">service: <span name="com.twitter.finagle.Service" class="extype">Service</span>[<span name="org.jboss.netty.handler.codec.http.HttpRequest" class="extype">HttpRequest</span>, <span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>]</span>, <span name="options">options: List[(<span name="org.jboss.netty.handler.codec.http.HttpMessage" class="extype">HttpMessage</span>) ⇒ <span name="scala.Unit" class="extype">Unit</span>]</span>)</span>
       </span>
       </h4>
       
@@ -72,7 +74,7 @@
             </div>
 
         
-        
+
         
 
         <div class="values members" id="values">
@@ -80,77 +82,84 @@
               <ol><li visbl="pub" name="scala.AnyRef#!=" data-isabs="false">
       <a id="!=(AnyRef):Boolean"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">!=</span>
-        
-        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name" title="gt4s: $bang$eq">!=</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li visbl="pub" name="scala.Any#!=" data-isabs="false">
       <a id="!=(Any):Boolean"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">!=</span>
-        
-        <span class="params">(<span name="arg0">arg0: <span name="scala.Any" class="extype">Any</span></span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name" title="gt4s: $bang$eq">!=</span><span class="params">(<span name="arg0">arg0: <span name="scala.Any" class="extype">Any</span></span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>Any</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef###" data-isabs="false">
       <a id="##():Int"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">##</span>
-        
-        <span class="params">()</span><span class="result">: <span name="scala.Int" class="extype">Int</span></span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name" title="gt4s: $hash$hash">##</span><span class="params">()</span><span class="result">: <span name="scala.Int" class="extype">Int</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#==" data-isabs="false">
       <a id="==(AnyRef):Boolean"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">==</span>
-        
-        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name" title="gt4s: $eq$eq">==</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li visbl="pub" name="scala.Any#==" data-isabs="false">
       <a id="==(Any):Boolean"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">==</span>
-        
-        <span class="params">(<span name="arg0">arg0: <span name="scala.Any" class="extype">Any</span></span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name" title="gt4s: $eq$eq">==</span><span class="params">(<span name="arg0">arg0: <span name="scala.Any" class="extype">Any</span></span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>Any</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li visbl="pub" name="scala.Any#asInstanceOf" data-isabs="false">
       <a id="asInstanceOf[T0]:T0"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">asInstanceOf</span>
-        <span class="tparams">[<span name="T0">T0</span>]</span>
-        <span class="result">: T0</span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: T0</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>Any</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#auth" data-isabs="false">
       <a id="auth(String,String):FHttpRequest"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">auth</span>
-        
-        <span class="params">(<span name="user">user: String</span>, <span name="password">password: String</span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">auth</span><span class="params">(<span name="user">user: String</span>, <span name="password">password: String</span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Adds a basic http auth header to the request</p><div class="fullcomment"><div class="comment cmt"><p>Adds a basic http auth header to the request</p></div><dl class="paramcmts block"><dt class="param">user</dt><dd class="cmt"><p>The username</p></dd><dt class="param">password</dt><dd class="cmt"><p>The password
@@ -158,66 +167,72 @@
     </li><li visbl="prt" name="com.foursquare.fhttp.FHttpRequest#base64" data-isabs="false">
       <a id="base64(String):String"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">base64</span>
-        
-        <span class="params">(<span name="in">in: String</span>)</span><span class="result">: String</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">base64</span><span class="params">(<span name="in">in: String</span>)</span><span class="result">: String</span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
     </li><li visbl="prt" name="com.foursquare.fhttp.FHttpRequest#base64" data-isabs="false">
       <a id="base64(Array[Byte]):String"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">base64</span>
-        
-        <span class="params">(<span name="bytes">bytes: <span name="scala.Array" class="extype">Array</span>[<span name="scala.Byte" class="extype">Byte</span>]</span>)</span><span class="result">: <span name="java.lang.String" class="extype">String</span></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">base64</span><span class="params">(<span name="bytes">bytes: <span name="scala.Array" class="extype">Array</span>[<span name="scala.Byte" class="extype">Byte</span>]</span>)</span><span class="result">: <span name="java.lang.String" class="extype">String</span></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
     </li><li visbl="prt" name="com.foursquare.fhttp.FHttpRequest#block" data-isabs="false">
       <a id="block:(Future[HttpResponse]) ⇒ ClientResponseOrException"></a>
       <h4 class="signature">
-      <span class="kind">val</span>
-      <span class="symbol"> 
-        <span class="name">block</span>
-        
-        <span class="result">: (<span name="com.twitter.util.Future" class="extype">Future</span>[<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>]) ⇒ <a name="com.foursquare.fhttp.ClientResponseOrException" class="extype" href="ClientResponseOrException.html">ClientResponseOrException</a></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">block</span><span class="result">: (<span name="com.twitter.util.Future" class="extype">Future</span>[<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>]) ⇒ <a name="com.foursquare.fhttp.ClientResponseOrException" class="extype" href="ClientResponseOrException.html">ClientResponseOrException</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#canEqual" data-isabs="false">
       <a id="canEqual(Any):Boolean"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">canEqual</span>
-        
-        <span class="params">(<span name="arg0">arg0: <span name="scala.Any" class="extype">Any</span></span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">canEqual</span><span class="params">(<span name="arg0">arg0: <span name="scala.Any" class="extype">Any</span></span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a> → Equals</dd></dl></div>
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#client" data-isabs="false">
       <a id="client:FHttpClient"></a>
       <h4 class="signature">
-      <span class="kind">val</span>
-      <span class="symbol"> 
-        <span class="name">client</span>
-        
-        <span class="result">: <a name="com.foursquare.fhttp.FHttpClient" class="extype" href="FHttpClient.html">FHttpClient</a></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">client</span><span class="result">: <a name="com.foursquare.fhttp.FHttpClient" class="extype" href="FHttpClient.html">FHttpClient</a></span>
       </span>
       </h4>
       
     </li><li visbl="prt" name="scala.AnyRef#clone" data-isabs="false">
       <a id="clone():AnyRef"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">clone</span>
-        
-        <span class="params">()</span><span class="result">: AnyRef</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">clone</span><span class="params">()</span><span class="result">: AnyRef</span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a name="java.lang" class="extype" href="../../../java/lang/package.html">lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
@@ -227,22 +242,24 @@
     </li><li visbl="prt" name="com.foursquare.fhttp.FHttpRequest#content" data-isabs="false">
       <a id="content(Array[Byte]):FHttpRequest"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">content</span>
-        
-        <span class="params">(<span name="data">data: <span name="scala.Array" class="extype">Array</span>[<span name="scala.Byte" class="extype">Byte</span>]</span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">content</span><span class="params">(<span name="data">data: <span name="scala.Array" class="extype">Array</span>[<span name="scala.Byte" class="extype">Byte</span>]</span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#contentType" data-isabs="false">
       <a id="contentType(String):FHttpRequest"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">contentType</span>
-        
-        <span class="params">(<span name="t">t: String</span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">contentType</span><span class="params">(<span name="t">t: String</span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Sets the content type header of the request</p><div class="fullcomment"><div class="comment cmt"><p>Sets the content type header of the request</p></div><dl class="paramcmts block"><dt class="param">t</dt><dd class="cmt"><p>The content type
@@ -250,46 +267,89 @@
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#debug" data-isabs="false">
       <a id="debug():FHttpRequest"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">debug</span>
-        
-        <span class="params">()</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">debug</span><span class="params">()</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Adds a debugging filter to print the request and the response.</p><div class="fullcomment"><div class="comment cmt"><p>Adds a debugging filter to print the request and the response.  Can be added multiple times
 to inspect the filter transformations
 </p></div></div>
+    </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#deleteFuture" data-isabs="false">
+      <a id="deleteFuture[T]((HttpResponse) ⇒ T):Future[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">deleteFuture</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: <span name="com.twitter.util.Future" class="extype">Future</span>[T]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Issue a non-blocking DELETE request</p><div class="fullcomment"><div class="comment cmt"><p>Issue a non-blocking DELETE request</p></div><dl class="paramcmts block"><dt class="param">resMap</dt><dd class="cmt"><p>a function to convert the HttpResponse to the desired response type
+</p></dd></dl></div>
+    </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#deleteOption" data-isabs="false">
+      <a id="deleteOption[T]((HttpResponse) ⇒ T):Option[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">deleteOption</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: <span name="scala.Option" class="extype">Option</span>[T]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Issue a blocking DELETE request</p><div class="fullcomment"><div class="comment cmt"><p>Issue a blocking DELETE request</p></div><dl class="paramcmts block"><dt class="param">resMap</dt><dd class="cmt"><p>a function to convert the HttpResponse to the desired response type
+</p></dd></dl></div>
+    </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#delete_!" data-isabs="false">
+      <a id="delete_![T]((HttpResponse) ⇒ T):T"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name" title="gt4s: delete_$bang">delete_!</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: T</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Issue a blocking DELETE request and throw on failure</p><div class="fullcomment"><div class="comment cmt"><p>Issue a blocking DELETE request and throw on failure</p></div><dl class="paramcmts block"><dt class="param">resMap</dt><dd class="cmt"><p>a function to convert the HttpResponse to the desired response type
+</p></dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#eq" data-isabs="false">
       <a id="eq(AnyRef):Boolean"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">eq</span>
-        
-        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#equals" data-isabs="false">
       <a id="equals(Any):Boolean"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">equals</span>
-        
-        <span class="params">(<span name="arg0">arg0: <span name="scala.Any" class="extype">Any</span></span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span name="scala.Any" class="extype">Any</span></span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a> → Equals → AnyRef → Any</dd></dl></div>
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#filter" data-isabs="false">
       <a id="filter(Filter[HttpRequest, HttpResponse, HttpRequest, HttpResponse]):FHttpRequest"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">filter</span>
-        
-        <span class="params">(<span name="f">f: <span name="com.twitter.finagle.Filter" class="extype">Filter</span>[<span name="org.jboss.netty.handler.codec.http.HttpRequest" class="extype">HttpRequest</span>, <span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>, <span name="org.jboss.netty.handler.codec.http.HttpRequest" class="extype">HttpRequest</span>, <span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>]</span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">filter</span><span class="params">(<span name="f">f: <span name="com.twitter.finagle.Filter" class="extype">Filter</span>[<span name="org.jboss.netty.handler.codec.http.HttpRequest" class="extype">HttpRequest</span>, <span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>, <span name="org.jboss.netty.handler.codec.http.HttpRequest" class="extype">HttpRequest</span>, <span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>]</span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Adds a filter to the service</p><div class="fullcomment"><div class="comment cmt"><p>Adds a filter to the service</p></div><dl class="paramcmts block"><dt class="param">f</dt><dd class="cmt"><p>the filter to add to the stack
@@ -297,11 +357,12 @@ to inspect the filter transformations
     </li><li visbl="prt" name="scala.AnyRef#finalize" data-isabs="false">
       <a id="finalize():Unit"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">finalize</span>
-        
-        <span class="params">()</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">finalize</span><span class="params">()</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a name="java.lang" class="extype" href="../../../java/lang/package.html">lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
@@ -311,22 +372,24 @@ to inspect the filter transformations
     </li><li visbl="pub" name="scala.AnyRef#getClass" data-isabs="false">
       <a id="getClass():java.lang.Class[_]"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">getClass</span>
-        
-        <span class="params">()</span><span class="result">: java.lang.Class[_]</span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getClass</span><span class="params">()</span><span class="result">: java.lang.Class[_]</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#getFuture" data-isabs="false">
       <a id="getFuture[T]((HttpResponse) ⇒ T):Future[T]"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">getFuture</span>
-        <span class="tparams">[<span name="T">T</span>]</span>
-        <span class="params">(<span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: <span name="com.twitter.util.Future" class="extype">Future</span>[T]</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getFuture</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: <span name="com.twitter.util.Future" class="extype">Future</span>[T]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Issue a non-blocking GET request</p><div class="fullcomment"><div class="comment cmt"><p>Issue a non-blocking GET request</p></div><dl class="paramcmts block"><dt class="param">resMap</dt><dd class="cmt"><p>a function to convert the HttpResponse to the desired response type
@@ -334,11 +397,12 @@ to inspect the filter transformations
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#getOption" data-isabs="false">
       <a id="getOption[T]((HttpResponse) ⇒ T):Option[T]"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">getOption</span>
-        <span class="tparams">[<span name="T">T</span>]</span>
-        <span class="params">(<span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: <span name="scala.Option" class="extype">Option</span>[T]</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getOption</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: <span name="scala.Option" class="extype">Option</span>[T]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Issue a blocking GET request</p><div class="fullcomment"><div class="comment cmt"><p>Issue a blocking GET request</p></div><dl class="paramcmts block"><dt class="param">resMap</dt><dd class="cmt"><p>a function to convert the HttpResponse to the desired response type
@@ -346,11 +410,12 @@ to inspect the filter transformations
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#get_!" data-isabs="false">
       <a id="get_![T]((HttpResponse) ⇒ T):T"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">get_!</span>
-        <span class="tparams">[<span name="T">T</span>]</span>
-        <span class="params">(<span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: T</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name" title="gt4s: get_$bang">get_!</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: T</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Issue a blocking GET request and throw on failure</p><div class="fullcomment"><div class="comment cmt"><p>Issue a blocking GET request and throw on failure</p></div><dl class="paramcmts block"><dt class="param">resMap</dt><dd class="cmt"><p>a function to convert the HttpResponse to the desired response type
@@ -358,145 +423,172 @@ to inspect the filter transformations
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#hasParams" data-isabs="false">
       <a id="hasParams:Boolean"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">hasParams</span>
-        
-        <span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">hasParams</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
       </span>
       </h4>
       
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#hashCode" data-isabs="false">
       <a id="hashCode():Int"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">hashCode</span>
-        
-        <span class="params">()</span><span class="result">: <span name="scala.Int" class="extype">Int</span></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span name="scala.Int" class="extype">Int</span></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a> → AnyRef → Any</dd></dl></div>
+    </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#headFuture" data-isabs="false">
+      <a id="headFuture[T]((HttpResponse) ⇒ T):Future[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">headFuture</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: <span name="com.twitter.util.Future" class="extype">Future</span>[T]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Issue a non-blocking HEAD request</p><div class="fullcomment"><div class="comment cmt"><p>Issue a non-blocking HEAD request</p></div><dl class="paramcmts block"><dt class="param">resMap</dt><dd class="cmt"><p>a function to convert the HttpResponse to the desired response type
+</p></dd></dl></div>
+    </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#headOption" data-isabs="false">
+      <a id="headOption[T]((HttpResponse) ⇒ T):Option[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">headOption</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: <span name="scala.Option" class="extype">Option</span>[T]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Issue a blocking HEAD request</p><div class="fullcomment"><div class="comment cmt"><p>Issue a blocking HEAD request</p></div><dl class="paramcmts block"><dt class="param">resMap</dt><dd class="cmt"><p>a function to convert the HttpResponse to the desired response type
+</p></dd></dl></div>
+    </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#head_!" data-isabs="false">
+      <a id="head_![T]((HttpResponse) ⇒ T):T"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name" title="gt4s: head_$bang">head_!</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: T</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Issue a blocking HEAD request and throw on failure</p><div class="fullcomment"><div class="comment cmt"><p>Issue a blocking HEAD request and throw on failure</p></div><dl class="paramcmts block"><dt class="param">resMap</dt><dd class="cmt"><p>a function to convert the HttpResponse to the desired response type
+</p></dd></dl></div>
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#headers" data-isabs="false">
       <a id="headers(List[(String, String)]):FHttpRequest"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">headers</span>
-        
-        <span class="params">(<span name="h">h: List[(String, String)]</span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">headers</span><span class="params">(<span name="h">h: List[(String, String)]</span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Adds headers to the request</p>
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#headers" data-isabs="false">
       <a id="headers((String, String)*):FHttpRequest"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">headers</span>
-        
-        <span class="params">(<span name="h">h: (String, String)*</span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">headers</span><span class="params">(<span name="h">h: (String, String)*</span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Adds headers to the request</p>
-    </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#httpMethod" data-isabs="false">
-      <a id="httpMethod(HttpMethod):FHttpRequest"></a>
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">httpMethod</span>
-        
-        <span class="params">(<span name="m">m: <span name="org.jboss.netty.handler.codec.http.HttpMethod" class="extype">HttpMethod</span></span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Sets the HTTP Method of the request (automatically done with the get* and post* methods)</p><div class="fullcomment"><div class="comment cmt"><p>Sets the HTTP Method of the request (automatically done with the get* and post* methods)</p></div><dl class="paramcmts block"><dt class="param">m</dt><dd class="cmt"><p>The HTTP method to use
-</p></dd></dl></div>
     </li><li visbl="pub" name="scala.Any#isInstanceOf" data-isabs="false">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">isInstanceOf</span>
-        <span class="tparams">[<span name="T0">T0</span>]</span>
-        <span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>Any</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#keepAlive" data-isabs="false">
       <a id="keepAlive(Boolean):FHttpRequest"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">keepAlive</span>
-        
-        <span class="params">(<span name="isKeepAlive">isKeepAlive: <span name="scala.Boolean" class="extype">Boolean</span></span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">keepAlive</span><span class="params">(<span name="isKeepAlive">isKeepAlive: <span name="scala.Boolean" class="extype">Boolean</span></span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Sets the keep alive header of the request (useful for HTTP 1.</p><div class="fullcomment"><div class="comment cmt"><p>Sets the keep alive header of the request (useful for HTTP 1.0)
 </p></div></div>
-    </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#method" data-isabs="false">
-      <a id="method:HttpMethod"></a>
-      <h4 class="signature">
-      <span class="kind">val</span>
-      <span class="symbol"> 
-        <span class="name">method</span>
-        
-        <span class="result">: <span name="org.jboss.netty.handler.codec.http.HttpMethod" class="extype">HttpMethod</span></span>
-      </span>
-      </h4>
-      
     </li><li visbl="pub" name="scala.AnyRef#ne" data-isabs="false">
       <a id="ne(AnyRef):Boolean"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">ne</span>
-        
-        <span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: AnyRef</span>)</span><span class="result">: <span name="scala.Boolean" class="extype">Boolean</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#notify" data-isabs="false">
       <a id="notify():Unit"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">notify</span>
-        
-        <span class="params">()</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notify</span><span class="params">()</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#notifyAll" data-isabs="false">
       <a id="notifyAll():Unit"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">notifyAll</span>
-        
-        <span class="params">()</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li visbl="prt" name="com.foursquare.fhttp.FHttpRequest#oauth" data-isabs="false">
       <a id="oauth(Token,Option[Token],Option[String]):FHttpRequest"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">oauth</span>
-        
-        <span class="params">(<span name="consumer">consumer: <a name="com.foursquare.fhttp.Token" class="extype" href="Token.html">Token</a></span>, <span name="token">token: <span name="scala.Option" class="extype">Option</span>[<a name="com.foursquare.fhttp.Token" class="extype" href="Token.html">Token</a>]</span>, <span name="verifier">verifier: <span name="scala.Option" class="extype">Option</span>[String]</span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">oauth</span><span class="params">(<span name="consumer">consumer: <a name="com.foursquare.fhttp.Token" class="extype" href="Token.html">Token</a></span>, <span name="token">token: <span name="scala.Option" class="extype">Option</span>[<a name="com.foursquare.fhttp.Token" class="extype" href="Token.html">Token</a>]</span>, <span name="verifier">verifier: <span name="scala.Option" class="extype">Option</span>[String]</span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#oauth" data-isabs="false">
       <a id="oauth(Token,Token,String):FHttpRequest"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">oauth</span>
-        
-        <span class="params">(<span name="consumer">consumer: <a name="com.foursquare.fhttp.Token" class="extype" href="Token.html">Token</a></span>, <span name="token">token: <a name="com.foursquare.fhttp.Token" class="extype" href="Token.html">Token</a></span>, <span name="verifier">verifier: String</span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">oauth</span><span class="params">(<span name="consumer">consumer: <a name="com.foursquare.fhttp.Token" class="extype" href="Token.html">Token</a></span>, <span name="token">token: <a name="com.foursquare.fhttp.Token" class="extype" href="Token.html">Token</a></span>, <span name="verifier">verifier: String</span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Adds tokens to the request.</p><div class="fullcomment"><div class="comment cmt"><p>Adds tokens to the request. The request will be signed with both tokens</p></div><dl class="paramcmts block"><dt class="param">consumer</dt><dd class="cmt"><p>The consumer token</p></dd><dt class="param">token</dt><dd class="cmt"><p>The oauth token</p></dd><dt class="param">verifier</dt><dd class="cmt"><p>The verifier parameter (1.0a)
@@ -504,11 +596,12 @@ to inspect the filter transformations
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#oauth" data-isabs="false">
       <a id="oauth(Token,Token):FHttpRequest"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">oauth</span>
-        
-        <span class="params">(<span name="consumer">consumer: <a name="com.foursquare.fhttp.Token" class="extype" href="Token.html">Token</a></span>, <span name="token">token: <a name="com.foursquare.fhttp.Token" class="extype" href="Token.html">Token</a></span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">oauth</span><span class="params">(<span name="consumer">consumer: <a name="com.foursquare.fhttp.Token" class="extype" href="Token.html">Token</a></span>, <span name="token">token: <a name="com.foursquare.fhttp.Token" class="extype" href="Token.html">Token</a></span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Adds tokens to the request.</p><div class="fullcomment"><div class="comment cmt"><p>Adds tokens to the request. The request will be signed with both tokens</p></div><dl class="paramcmts block"><dt class="param">consumer</dt><dd class="cmt"><p>The consumer token</p></dd><dt class="param">token</dt><dd class="cmt"><p>The oauth token
@@ -516,57 +609,62 @@ to inspect the filter transformations
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#oauth" data-isabs="false">
       <a id="oauth(Token):FHttpRequest"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">oauth</span>
-        
-        <span class="params">(<span name="consumer">consumer: <a name="com.foursquare.fhttp.Token" class="extype" href="Token.html">Token</a></span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">oauth</span><span class="params">(<span name="consumer">consumer: <a name="com.foursquare.fhttp.Token" class="extype" href="Token.html">Token</a></span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Adds a consumer token to the request.</p><div class="fullcomment"><div class="comment cmt"><p>Adds a consumer token to the request. The request will be signed with this token</p></div><dl class="paramcmts block"><dt class="param">consumer</dt><dd class="cmt"><p>The token to add
 </p></dd></dl></div>
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#option" data-isabs="false">
-      <a id="option(HttpOption):FHttpRequest"></a>
+      <a id="option((HttpMessage) ⇒ Unit):FHttpRequest"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">option</span>
-        
-        <span class="params">(<span name="o">o: HttpOption</span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">option</span><span class="params">(<span name="o">o: (<span name="org.jboss.netty.handler.codec.http.HttpMessage" class="extype">HttpMessage</span>) ⇒ <span name="scala.Unit" class="extype">Unit</span></span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Adds a pre-filter transformation to the HttpMessage</p><div class="fullcomment"><div class="comment cmt"><p>Adds a pre-filter transformation to the HttpMessage</p></div><dl class="paramcmts block"><dt class="param">o</dt><dd class="cmt"><p>A function to transform the HttpMessage
 </p></dd></dl></div>
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#options" data-isabs="false">
-      <a id="options:List[HttpOption]"></a>
+      <a id="options:List[(HttpMessage) ⇒ Unit]"></a>
       <h4 class="signature">
-      <span class="kind">val</span>
-      <span class="symbol"> 
-        <span class="name">options</span>
-        
-        <span class="result">: List[HttpOption]</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">options</span><span class="result">: List[(<span name="org.jboss.netty.handler.codec.http.HttpMessage" class="extype">HttpMessage</span>) ⇒ <span name="scala.Unit" class="extype">Unit</span>]</span>
       </span>
       </h4>
       
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#paramList" data-isabs="false">
       <a id="paramList:List[(String, String)]"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">paramList</span>
-        
-        <span class="result">: List[(String, String)]</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">paramList</span><span class="result">: List[(String, String)]</span>
       </span>
       </h4>
       
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#params" data-isabs="false">
       <a id="params(List[(String, String)]):FHttpRequest"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">params</span>
-        
-        <span class="params">(<span name="p">p: List[(String, String)]</span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">params</span><span class="params">(<span name="p">p: List[(String, String)]</span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Adds parameters to the request</p><div class="fullcomment"><div class="comment cmt"><p>Adds parameters to the request</p></div><dl class="paramcmts block"><dt class="param">p</dt><dd class="cmt"><p>The parameters to add
@@ -574,11 +672,12 @@ to inspect the filter transformations
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#params" data-isabs="false">
       <a id="params((String, String)*):FHttpRequest"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">params</span>
-        
-        <span class="params">(<span name="p">p: (String, String)*</span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">params</span><span class="params">(<span name="p">p: (String, String)*</span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Adds parameters to the request</p><div class="fullcomment"><div class="comment cmt"><p>Adds parameters to the request</p></div><dl class="paramcmts block"><dt class="param">p</dt><dd class="cmt"><p>The parameters to add
@@ -586,11 +685,12 @@ to inspect the filter transformations
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#postFuture" data-isabs="false">
       <a id="postFuture[T](List[MultiPart],(HttpResponse) ⇒ T):Future[T]"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">postFuture</span>
-        <span class="tparams">[<span name="T">T</span>]</span>
-        <span class="params">(<span name="data">data: List[<a name="com.foursquare.fhttp.MultiPart" class="extype" href="MultiPart.html">MultiPart</a>]</span>, <span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: <span name="com.twitter.util.Future" class="extype">Future</span>[T]</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">postFuture</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="data">data: List[<a name="com.foursquare.fhttp.MultiPart" class="extype" href="MultiPart.html">MultiPart</a>]</span>, <span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: <span name="com.twitter.util.Future" class="extype">Future</span>[T]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Issue a non-blocking multipart POST request</p><div class="fullcomment"><div class="comment cmt"><p>Issue a non-blocking multipart POST request</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>The parts to provide in the multipart message</p></dd><dt class="param">resMap</dt><dd class="cmt"><p>A function to convert the HttpResponse to the desired response type
@@ -598,11 +698,12 @@ to inspect the filter transformations
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#postFuture" data-isabs="false">
       <a id="postFuture[T](String,(HttpResponse) ⇒ T):Future[T]"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">postFuture</span>
-        <span class="tparams">[<span name="T">T</span>]</span>
-        <span class="params">(<span name="data">data: String</span>, <span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: <span name="com.twitter.util.Future" class="extype">Future</span>[T]</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">postFuture</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="data">data: String</span>, <span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: <span name="com.twitter.util.Future" class="extype">Future</span>[T]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Issue a non-blocking POST request</p><div class="fullcomment"><div class="comment cmt"><p>Issue a non-blocking POST request</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>The content to provide in the message</p></dd><dt class="param">resMap</dt><dd class="cmt"><p>A function to convert the HttpResponse to the desired response type
@@ -610,11 +711,12 @@ to inspect the filter transformations
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#postFuture" data-isabs="false">
       <a id="postFuture[T](Array[Byte],(HttpResponse) ⇒ T):Future[T]"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">postFuture</span>
-        <span class="tparams">[<span name="T">T</span>]</span>
-        <span class="params">(<span name="data">data: <span name="scala.Array" class="extype">Array</span>[<span name="scala.Byte" class="extype">Byte</span>]</span>, <span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: <span name="com.twitter.util.Future" class="extype">Future</span>[T]</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">postFuture</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="data">data: <span name="scala.Array" class="extype">Array</span>[<span name="scala.Byte" class="extype">Byte</span>]</span>, <span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: <span name="com.twitter.util.Future" class="extype">Future</span>[T]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Issue a non-blocking POST request</p><div class="fullcomment"><div class="comment cmt"><p>Issue a non-blocking POST request</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>The content to provide in the message</p></dd><dt class="param">resMap</dt><dd class="cmt"><p>A function to convert the HttpResponse to the desired response type
@@ -622,11 +724,12 @@ to inspect the filter transformations
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#postOption" data-isabs="false">
       <a id="postOption[T](List[MultiPart],(HttpResponse) ⇒ T):Option[T]"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">postOption</span>
-        <span class="tparams">[<span name="T">T</span>]</span>
-        <span class="params">(<span name="data">data: List[<a name="com.foursquare.fhttp.MultiPart" class="extype" href="MultiPart.html">MultiPart</a>]</span>, <span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: <span name="scala.Option" class="extype">Option</span>[T]</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">postOption</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="data">data: List[<a name="com.foursquare.fhttp.MultiPart" class="extype" href="MultiPart.html">MultiPart</a>]</span>, <span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: <span name="scala.Option" class="extype">Option</span>[T]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Issue blocking multipart POST request</p><div class="fullcomment"><div class="comment cmt"><p>Issue blocking multipart POST request</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>The parts to provide in the multipart message</p></dd><dt class="param">resMap</dt><dd class="cmt"><p>A function to convert the HttpResponse to the desired response type
@@ -634,11 +737,12 @@ to inspect the filter transformations
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#postOption" data-isabs="false">
       <a id="postOption[T](String,(HttpResponse) ⇒ T):Option[T]"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">postOption</span>
-        <span class="tparams">[<span name="T">T</span>]</span>
-        <span class="params">(<span name="data">data: String</span>, <span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: <span name="scala.Option" class="extype">Option</span>[T]</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">postOption</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="data">data: String</span>, <span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: <span name="scala.Option" class="extype">Option</span>[T]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Issue a blocking POST request</p><div class="fullcomment"><div class="comment cmt"><p>Issue a blocking POST request</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>The content to provide in the message</p></dd><dt class="param">resMap</dt><dd class="cmt"><p>A function to convert the HttpResponse to the desired response type
@@ -646,11 +750,12 @@ to inspect the filter transformations
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#postOption" data-isabs="false">
       <a id="postOption[T](Array[Byte],(HttpResponse) ⇒ T):Option[T]"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">postOption</span>
-        <span class="tparams">[<span name="T">T</span>]</span>
-        <span class="params">(<span name="data">data: <span name="scala.Array" class="extype">Array</span>[<span name="scala.Byte" class="extype">Byte</span>]</span>, <span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: <span name="scala.Option" class="extype">Option</span>[T]</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">postOption</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="data">data: <span name="scala.Array" class="extype">Array</span>[<span name="scala.Byte" class="extype">Byte</span>]</span>, <span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: <span name="scala.Option" class="extype">Option</span>[T]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Issue a blocking POST request</p><div class="fullcomment"><div class="comment cmt"><p>Issue a blocking POST request</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>The content to provide in the message</p></dd><dt class="param">resMap</dt><dd class="cmt"><p>A function to convert the HttpResponse to the desired response type
@@ -658,11 +763,12 @@ to inspect the filter transformations
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#post_!" data-isabs="false">
       <a id="post_![T](List[MultiPart],(HttpResponse) ⇒ T):T"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">post_!</span>
-        <span class="tparams">[<span name="T">T</span>]</span>
-        <span class="params">(<span name="data">data: List[<a name="com.foursquare.fhttp.MultiPart" class="extype" href="MultiPart.html">MultiPart</a>]</span>, <span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: T</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name" title="gt4s: post_$bang">post_!</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="data">data: List[<a name="com.foursquare.fhttp.MultiPart" class="extype" href="MultiPart.html">MultiPart</a>]</span>, <span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: T</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Issue blocking multipart POST request and throw on failure</p><div class="fullcomment"><div class="comment cmt"><p>Issue blocking multipart POST request and throw on failure</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>The parts to provide in the multipart message</p></dd><dt class="param">resMap</dt><dd class="cmt"><p>A function to convert the HttpResponse to the desired response type
@@ -670,11 +776,12 @@ to inspect the filter transformations
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#post_!" data-isabs="false">
       <a id="post_![T](String,(HttpResponse) ⇒ T):T"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">post_!</span>
-        <span class="tparams">[<span name="T">T</span>]</span>
-        <span class="params">(<span name="data">data: String</span>, <span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: T</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name" title="gt4s: post_$bang">post_!</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="data">data: String</span>, <span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: T</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Issue a blocking POST request and throw on failure</p><div class="fullcomment"><div class="comment cmt"><p>Issue a blocking POST request and throw on failure</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>The content to provide in the message</p></dd><dt class="param">resMap</dt><dd class="cmt"><p>A function to convert the HttpResponse to the desired response type
@@ -682,11 +789,12 @@ to inspect the filter transformations
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#post_!" data-isabs="false">
       <a id="post_![T](Array[Byte],(HttpResponse) ⇒ T):T"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">post_!</span>
-        <span class="tparams">[<span name="T">T</span>]</span>
-        <span class="params">(<span name="data">data: <span name="scala.Array" class="extype">Array</span>[<span name="scala.Byte" class="extype">Byte</span>]</span>, <span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: T</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name" title="gt4s: post_$bang">post_!</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="data">data: <span name="scala.Array" class="extype">Array</span>[<span name="scala.Byte" class="extype">Byte</span>]</span>, <span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: T</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Issue a blocking POST request and throw on failure</p><div class="fullcomment"><div class="comment cmt"><p>Issue a blocking POST request and throw on failure</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>The content to provide in the message</p></dd><dt class="param">resMap</dt><dd class="cmt"><p>A function to convert the HttpResponse to the desired response type
@@ -694,121 +802,249 @@ to inspect the filter transformations
     </li><li visbl="prt" name="com.foursquare.fhttp.FHttpRequest#prepData" data-isabs="false">
       <a id="prepData(Array[Byte]):FHttpRequest"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">prepData</span>
-        
-        <span class="params">(<span name="data">data: <span name="scala.Array" class="extype">Array</span>[<span name="scala.Byte" class="extype">Byte</span>]</span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">prepData</span><span class="params">(<span name="data">data: <span name="scala.Array" class="extype">Array</span>[<span name="scala.Byte" class="extype">Byte</span>]</span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
     </li><li visbl="prt" name="com.foursquare.fhttp.FHttpRequest#prepMultipart" data-isabs="false">
       <a id="prepMultipart(List[Part]):FHttpRequest"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">prepMultipart</span>
-        
-        <span class="params">(<span name="parts">parts: List[<span name="org.apache.commons.httpclient.methods.multipart.Part" class="extype">Part</span>]</span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">prepMultipart</span><span class="params">(<span name="parts">parts: List[<span name="org.apache.commons.httpclient.methods.multipart.Part" class="extype">Part</span>]</span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
     </li><li visbl="prt" name="com.foursquare.fhttp.FHttpRequest#prepPost" data-isabs="false">
       <a id="prepPost(Array[Byte]):FHttpRequest"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">prepPost</span>
-        
-        <span class="params">(<span name="data">data: <span name="scala.Array" class="extype">Array</span>[<span name="scala.Byte" class="extype">Byte</span>]</span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">prepPost</span><span class="params">(<span name="data">data: <span name="scala.Array" class="extype">Array</span>[<span name="scala.Byte" class="extype">Byte</span>]</span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
     </li><li visbl="prt" name="com.foursquare.fhttp.FHttpRequest#process" data-isabs="false">
-      <a id="process[T]((Future[HttpResponse]) ⇒ T):T"></a>
+      <a id="process[T](HttpMethod,(Future[HttpResponse]) ⇒ T):T"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">process</span>
-        <span class="tparams">[<span name="T">T</span>]</span>
-        <span class="params">(<span name="processor">processor: (<span name="com.twitter.util.Future" class="extype">Future</span>[<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>]) ⇒ T</span>)</span><span class="result">: T</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">process</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="method">method: <span name="org.jboss.netty.handler.codec.http.HttpMethod" class="extype">HttpMethod</span></span>, <span name="processor">processor: (<span name="com.twitter.util.Future" class="extype">Future</span>[<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>]) ⇒ T</span>)</span><span class="result">: T</span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#productArity" data-isabs="false">
       <a id="productArity:Int"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">productArity</span>
-        
-        <span class="result">: <span name="scala.Int" class="extype">Int</span></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">productArity</span><span class="result">: <span name="scala.Int" class="extype">Int</span></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a> → Product</dd></dl></div>
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#productElement" data-isabs="false">
       <a id="productElement(Int):Any"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">productElement</span>
-        
-        <span class="params">(<span name="arg0">arg0: <span name="scala.Int" class="extype">Int</span></span>)</span><span class="result">: <span name="scala.Any" class="extype">Any</span></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">productElement</span><span class="params">(<span name="arg0">arg0: <span name="scala.Int" class="extype">Int</span></span>)</span><span class="result">: <span name="scala.Any" class="extype">Any</span></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a> → Product</dd></dl></div>
     </li><li visbl="pub" name="scala.Product#productIterator" data-isabs="false">
       <a id="productIterator:Iterator[Any]"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">productIterator</span>
-        
-        <span class="result">: Iterator[<span name="scala.Any" class="extype">Any</span>]</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">productIterator</span><span class="result">: Iterator[<span name="scala.Any" class="extype">Any</span>]</span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Product</dd></dl></div>
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#productPrefix" data-isabs="false">
       <a id="productPrefix:String"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">productPrefix</span>
-        
-        <span class="result">: <span name="java.lang.String" class="extype">String</span></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">productPrefix</span><span class="result">: <span name="java.lang.String" class="extype">String</span></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a> → Product</dd></dl></div>
+    </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#putFuture" data-isabs="false">
+      <a id="putFuture[T](List[MultiPart],(HttpResponse) ⇒ T):Future[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">putFuture</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="data">data: List[<a name="com.foursquare.fhttp.MultiPart" class="extype" href="MultiPart.html">MultiPart</a>]</span>, <span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: <span name="com.twitter.util.Future" class="extype">Future</span>[T]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Issue a non-blocking multipart POST request</p><div class="fullcomment"><div class="comment cmt"><p>Issue a non-blocking multipart POST request</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>The parts to provide in the multipart message</p></dd><dt class="param">resMap</dt><dd class="cmt"><p>A function to convert the HttpResponse to the desired response type
+</p></dd></dl></div>
+    </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#putFuture" data-isabs="false">
+      <a id="putFuture[T](String,(HttpResponse) ⇒ T):Future[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">putFuture</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="data">data: String</span>, <span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: <span name="com.twitter.util.Future" class="extype">Future</span>[T]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Issue a non-blocking PUT request</p><div class="fullcomment"><div class="comment cmt"><p>Issue a non-blocking PUT request</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>The content to provide in the message</p></dd><dt class="param">resMap</dt><dd class="cmt"><p>A function to convert the HttpResponse to the desired response type
+</p></dd></dl></div>
+    </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#putFuture" data-isabs="false">
+      <a id="putFuture[T](Array[Byte],(HttpResponse) ⇒ T):Future[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">putFuture</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="data">data: <span name="scala.Array" class="extype">Array</span>[<span name="scala.Byte" class="extype">Byte</span>]</span>, <span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: <span name="com.twitter.util.Future" class="extype">Future</span>[T]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Issue a non-blocking PUT request</p><div class="fullcomment"><div class="comment cmt"><p>Issue a non-blocking PUT request</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>The content to provide in the message</p></dd><dt class="param">resMap</dt><dd class="cmt"><p>A function to convert the HttpResponse to the desired response type
+</p></dd></dl></div>
+    </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#putOption" data-isabs="false">
+      <a id="putOption[T](List[MultiPart],(HttpResponse) ⇒ T):Option[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">putOption</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="data">data: List[<a name="com.foursquare.fhttp.MultiPart" class="extype" href="MultiPart.html">MultiPart</a>]</span>, <span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: <span name="scala.Option" class="extype">Option</span>[T]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Issue blocking multipart PUT request</p><div class="fullcomment"><div class="comment cmt"><p>Issue blocking multipart PUT request</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>The parts to provide in the multipart message</p></dd><dt class="param">resMap</dt><dd class="cmt"><p>A function to convert the HttpResponse to the desired response type
+</p></dd></dl></div>
+    </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#putOption" data-isabs="false">
+      <a id="putOption[T](String,(HttpResponse) ⇒ T):Option[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">putOption</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="data">data: String</span>, <span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: <span name="scala.Option" class="extype">Option</span>[T]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Issue a blocking PUT request</p><div class="fullcomment"><div class="comment cmt"><p>Issue a blocking PUT request</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>The content to provide in the message</p></dd><dt class="param">resMap</dt><dd class="cmt"><p>A function to convert the HttpResponse to the desired response type
+</p></dd></dl></div>
+    </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#putOption" data-isabs="false">
+      <a id="putOption[T](Array[Byte],(HttpResponse) ⇒ T):Option[T]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">putOption</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="data">data: <span name="scala.Array" class="extype">Array</span>[<span name="scala.Byte" class="extype">Byte</span>]</span>, <span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: <span name="scala.Option" class="extype">Option</span>[T]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Issue a blocking PUT request</p><div class="fullcomment"><div class="comment cmt"><p>Issue a blocking PUT request</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>The content to provide in the message</p></dd><dt class="param">resMap</dt><dd class="cmt"><p>A function to convert the HttpResponse to the desired response type
+</p></dd></dl></div>
+    </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#put_!" data-isabs="false">
+      <a id="put_![T](List[MultiPart],(HttpResponse) ⇒ T):T"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name" title="gt4s: put_$bang">put_!</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="data">data: List[<a name="com.foursquare.fhttp.MultiPart" class="extype" href="MultiPart.html">MultiPart</a>]</span>, <span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: T</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Issue blocking multipart PUT request and throw on failure</p><div class="fullcomment"><div class="comment cmt"><p>Issue blocking multipart PUT request and throw on failure</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>The parts to provide in the multipart message</p></dd><dt class="param">resMap</dt><dd class="cmt"><p>A function to convert the HttpResponse to the desired response type
+</p></dd></dl></div>
+    </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#put_!" data-isabs="false">
+      <a id="put_![T](String,(HttpResponse) ⇒ T):T"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name" title="gt4s: put_$bang">put_!</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="data">data: String</span>, <span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: T</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Issue a blocking PUT request and throw on failure</p><div class="fullcomment"><div class="comment cmt"><p>Issue a blocking PUT request and throw on failure</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>The content to provide in the message</p></dd><dt class="param">resMap</dt><dd class="cmt"><p>A function to convert the HttpResponse to the desired response type
+</p></dd></dl></div>
+    </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#put_!" data-isabs="false">
+      <a id="put_![T](Array[Byte],(HttpResponse) ⇒ T):T"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name" title="gt4s: put_$bang">put_!</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="data">data: <span name="scala.Array" class="extype">Array</span>[<span name="scala.Byte" class="extype">Byte</span>]</span>, <span name="resMap">resMap: (<span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>) ⇒ T</span>)</span><span class="result">: T</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Issue a blocking PUT request and throw on failure</p><div class="fullcomment"><div class="comment cmt"><p>Issue a blocking PUT request and throw on failure</p></div><dl class="paramcmts block"><dt class="param">data</dt><dd class="cmt"><p>The content to provide in the message</p></dd><dt class="param">resMap</dt><dd class="cmt"><p>A function to convert the HttpResponse to the desired response type
+</p></dd></dl></div>
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#service" data-isabs="false">
       <a id="service:Service[HttpRequest, HttpResponse]"></a>
       <h4 class="signature">
-      <span class="kind">val</span>
-      <span class="symbol"> 
-        <span class="name">service</span>
-        
-        <span class="result">: <span name="com.twitter.finagle.Service" class="extype">Service</span>[<span name="org.jboss.netty.handler.codec.http.HttpRequest" class="extype">HttpRequest</span>, <span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>]</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">service</span><span class="result">: <span name="com.twitter.finagle.Service" class="extype">Service</span>[<span name="org.jboss.netty.handler.codec.http.HttpRequest" class="extype">HttpRequest</span>, <span name="org.jboss.netty.handler.codec.http.HttpResponse" class="extype">HttpResponse</span>]</span>
       </span>
       </h4>
       
     </li><li visbl="pub" name="scala.AnyRef#synchronized" data-isabs="false">
       <a id="synchronized[T0](⇒ T0):T0"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">synchronized</span>
-        <span class="tparams">[<span name="T0">T0</span>]</span>
-        <span class="params">(<span name="arg0">arg0: ⇒ T0</span>)</span><span class="result">: T0</span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ T0</span>)</span><span class="result">: T0</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#timeout" data-isabs="false">
       <a id="timeout(Int):FHttpRequest"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">timeout</span>
-        
-        <span class="params">(<span name="millis">millis: <span name="scala.Int" class="extype">Int</span></span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">timeout</span><span class="params">(<span name="millis">millis: <span name="scala.Int" class="extype">Int</span></span>)</span><span class="result">: <a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Adds a request timeout (using the TimeoutFilter) to the stack.</p><div class="fullcomment"><div class="comment cmt"><p>Adds a request timeout (using the TimeoutFilter) to the stack.  Applies blocking or future responses.</p></div><dl class="paramcmts block"><dt class="param">millis</dt><dd class="cmt"><p>The number of milliseconds to wait
@@ -816,86 +1052,93 @@ to inspect the filter transformations
     </li><li visbl="prt" name="com.foursquare.fhttp.FHttpRequest#toPart" data-isabs="false">
       <a id="toPart(MultiPart):FilePart"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">toPart</span>
-        
-        <span class="params">(<span name="part">part: <a name="com.foursquare.fhttp.MultiPart" class="extype" href="MultiPart.html">MultiPart</a></span>)</span><span class="result">: <span name="org.apache.commons.httpclient.methods.multipart.FilePart" class="extype">FilePart</span></span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">toPart</span><span class="params">(<span name="part">part: <a name="com.foursquare.fhttp.MultiPart" class="extype" href="MultiPart.html">MultiPart</a></span>)</span><span class="result">: <span name="org.apache.commons.httpclient.methods.multipart.FilePart" class="extype">FilePart</span></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#toString" data-isabs="false">
       <a id="toString():String"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">toString</span>
-        
-        <span class="params">()</span><span class="result">: String</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">toString</span><span class="params">()</span><span class="result">: String</span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="com.foursquare.fhttp.FHttpRequest" class="extype" href="">FHttpRequest</a> → AnyRef → Any</dd></dl></div>
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#traceName" data-isabs="false">
       <a id="traceName:String"></a>
       <h4 class="signature">
-      <span class="kind">val</span>
-      <span class="symbol"> 
-        <span class="name">traceName</span>
-        
-        <span class="result">: String</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">traceName</span><span class="result">: String</span>
       </span>
       </h4>
       
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest#uri" data-isabs="false">
       <a id="uri:String"></a>
       <h4 class="signature">
-      <span class="kind">val</span>
-      <span class="symbol"> 
-        <span class="name">uri</span>
-        
-        <span class="result">: String</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">uri</span><span class="result">: String</span>
       </span>
       </h4>
       
     </li><li visbl="pub" name="scala.AnyRef#wait" data-isabs="false">
       <a id="wait():Unit"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">wait</span>
-        
-        <span class="params">()</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">()</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#wait" data-isabs="false">
       <a id="wait(Long,Int):Unit"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">wait</span>
-        
-        <span class="params">(<span name="arg0">arg0: <span name="scala.Long" class="extype">Long</span></span>, <span name="arg1">arg1: <span name="scala.Int" class="extype">Int</span></span>)</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span name="scala.Long" class="extype">Long</span></span>, <span name="arg1">arg1: <span name="scala.Int" class="extype">Int</span></span>)</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#wait" data-isabs="false">
       <a id="wait(Long):Unit"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name">wait</span>
-        
-        <span class="params">(<span name="arg0">arg0: <span name="scala.Long" class="extype">Long</span></span>)</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span name="scala.Long" class="extype">Long</span></span>)</span><span class="result">: <span name="scala.Unit" class="extype">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>final </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">()</span>
               
         </dd></dl></div>
@@ -907,20 +1150,23 @@ to inspect the filter transformations
               <ol><li visbl="pub" name="scala.Product#productElements" data-isabs="false">
       <a id="productElements:Iterator[Any]"></a>
       <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol"> 
-        <span class="name deprecated">productElements</span>
-        
-        <span class="result">: Iterator[<span name="scala.Any" class="extype">Any</span>]</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: (Since version 2.8.0) use productIterator instead">productElements</span><span class="result">: Iterator[<span name="scala.Any" class="extype">Any</span>]</span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Product</dd><dt>Annotations</dt><dd>
                 <span class="name">@deprecated</span>
               
-        </dd><dt>Deprecated</dt><dd class="cmt"><p>use productIterator instead</p></dd></dl></div>
+        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.8.0)</i> use productIterator instead</p></dd></dl></div>
     </li></ol>
             </div>
+        </div>
 
+        <div id="inheritedMembers">
         <div name="scala.Serializable" class="parent">
               <h3>Inherited from <span name="scala.Serializable" class="extype">Serializable</span></h3>
             </div><div name="java.io.Serializable" class="parent">
@@ -934,10 +1180,14 @@ to inspect the filter transformations
             </div><div name="scala.Any" class="parent">
               <h3>Inherited from <span name="scala.Any" class="extype">Any</span></h3>
             </div>
+        </div>
 
       </div>
-      
+
       <div id="tooltip"></div>
-      
+
+      <div id="footer">  </div>
+
+
     </body>
       </html>

@@ -12,7 +12,7 @@
       <script type="text/javascript" src="../../../lib/tools.tooltip.js"></script>
     
         </head>
-        <body class="value">
+        <body onload="sh_highlightDocument('../lib/', '.min.js');" class="value">
       <div id="definition">
         <img src="../../../lib/package_big.png" />
         <p id="owner"><a name="com" class="extype" href="../../package.html">com</a>.<a name="com.foursquare" class="extype" href="../package.html">foursquare</a></p>
@@ -20,29 +20,30 @@
       </div>
 
       <h4 class="signature" id="signature">
-      <span class="kind">package</span>
-      <span class="symbol"> 
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
         <span class="name">fhttp</span>
-        
-        
       </span>
       </h4>
       
-          <div class="fullcommenttop" id="comment"></div>
+      <div class="fullcommenttop" id="comment"></div>
+    
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input accesskey="/" type="text" /></span><span class="post"></span></div>
         
+        
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
 
       <div id="template">
-
-        <div id="mbrsel">
-          <div id="textfilter"><span class="pre"></span><span class="input"><input accesskey="/" type="text" /></span><span class="post"></span></div>
-          
-          
-          <div id="visbl">
-              <span class="filtertype">Visibility</span>
-              <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
-            </div>
-        </div>
-
+        <div id="allMembers">
         
 
         <div class="types members" id="types">
@@ -50,55 +51,60 @@
               <ol><li visbl="pub" name="com.foursquare.fhttp.ClientException" data-isabs="false">
       <a id="ClientException:ClientException"></a>
       <h4 class="signature">
-      <span class="kind">case class</span>
-      <span class="symbol"> 
-        <a href="ClientException.html"><span class="name">ClientException</span></a>
-        
-        <span class="params">(<span name="exception">exception: Throwable</span>)</span><span class="result"> extends ClientResponseOrException with Product with Serializable</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="ClientException.html"><span class="name">ClientException</span></a><span class="params">(<span name="exception">exception: Throwable</span>)</span><span class="result"> extends ClientResponseOrException with Product with Serializable</span>
       </span>
       </h4>
       
     </li><li visbl="pub" name="com.foursquare.fhttp.ClientResponse" data-isabs="false">
       <a id="ClientResponse:ClientResponse[T]"></a>
       <h4 class="signature">
-      <span class="kind">case class</span>
-      <span class="symbol"> 
-        <a href="ClientResponse.html"><span class="name">ClientResponse</span></a>
-        <span class="tparams">[<span name="T">T</span>]</span>
-        <span class="params">(<span name="response">response: T</span>)</span><span class="result"> extends ClientResponseOrException with Product with Serializable</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="ClientResponse.html"><span class="name">ClientResponse</span></a><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="response">response: T</span>)</span><span class="result"> extends ClientResponseOrException with Product with Serializable</span>
       </span>
       </h4>
       
     </li><li visbl="pub" name="com.foursquare.fhttp.ClientResponseOrException" data-isabs="true">
       <a id="ClientResponseOrException:ClientResponseOrException"></a>
       <h4 class="signature">
-      <span class="kind">class</span>
-      <span class="symbol"> 
-        <a href="ClientResponseOrException.html"><span class="name">ClientResponseOrException</span></a>
-        
-        <span class="result"> extends AnyRef</span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ClientResponseOrException.html"><span class="name">ClientResponseOrException</span></a><span class="result"> extends AnyRef</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>abstract </dd></dl></div>
+      
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpClient" data-isabs="false">
       <a id="FHttpClient:FHttpClient"></a>
       <h4 class="signature">
-      <span class="kind">class</span>
-      <span class="symbol"> 
-        <a href="FHttpClient.html"><span class="name">FHttpClient</span></a>
-        
-        <span class="result"> extends AnyRef</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="FHttpClient.html"><span class="name">FHttpClient</span></a><span class="result"> extends AnyRef</span>
       </span>
       </h4>
       
     </li><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest" data-isabs="false">
       <a id="FHttpRequest:FHttpRequest"></a>
       <h4 class="signature">
-      <span class="kind">case class</span>
-      <span class="symbol"> 
-        <a href="FHttpRequest.html"><span class="name">FHttpRequest</span></a>
-        
-        <span class="params">(<span name="client">client: FHttpClient</span>, <span name="method">method: HttpMethod</span>, <span name="uri">uri: String</span>, <span name="traceName">traceName: String</span>, <span name="service">service: Service[HttpRequest, HttpResponse]</span>, <span name="options">options: List[HttpOption]</span>)</span><span class="result"> extends Product with Serializable</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="FHttpRequest.html"><span class="name">FHttpRequest</span></a><span class="params">(<span name="client">client: FHttpClient</span>, <span name="uri">uri: String</span>, <span name="traceName">traceName: String</span>, <span name="service">service: Service[HttpRequest, HttpResponse]</span>, <span name="options">options: List[(HttpMessage) ⇒ Unit]</span>)</span><span class="result"> extends Product with Serializable</span>
       </span>
       </h4>
       <p class="comment cmt">An HTTP request
@@ -106,50 +112,54 @@
     </li><li visbl="pub" name="com.foursquare.fhttp.HttpStatusException" data-isabs="false">
       <a id="HttpStatusException:HttpStatusException"></a>
       <h4 class="signature">
-      <span class="kind">case class</span>
-      <span class="symbol"> 
-        <a href="HttpStatusException.html"><span class="name">HttpStatusException</span></a>
-        
-        <span class="params">(<span name="code">code: Int</span>, <span name="reason">reason: String</span>, <span name="response">response: HttpResponse</span>)</span><span class="result"> extends RuntimeException with Product with Serializable</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="HttpStatusException.html"><span class="name">HttpStatusException</span></a><span class="params">(<span name="code">code: Int</span>, <span name="reason">reason: String</span>, <span name="response">response: HttpResponse</span>)</span><span class="result"> extends RuntimeException with Product with Serializable</span>
       </span>
       </h4>
       
     </li><li visbl="pub" name="com.foursquare.fhttp.MultiPart" data-isabs="false">
       <a id="MultiPart:MultiPart"></a>
       <h4 class="signature">
-      <span class="kind">case class</span>
-      <span class="symbol"> 
-        <a href="MultiPart.html"><span class="name">MultiPart</span></a>
-        
-        <span class="params">(<span name="name">name: String</span>, <span name="filename">filename: String</span>, <span name="mime">mime: String</span>, <span name="data">data: Array[Byte]</span>)</span><span class="result"> extends Product with Serializable</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="MultiPart.html"><span class="name">MultiPart</span></a><span class="params">(<span name="name">name: String</span>, <span name="filename">filename: String</span>, <span name="mime">mime: String</span>, <span name="data">data: Array[Byte]</span>)</span><span class="result"> extends Product with Serializable</span>
       </span>
       </h4>
       
     </li><li visbl="pub" name="com.foursquare.fhttp.OAuth1Filter" data-isabs="false">
       <a id="OAuth1Filter:OAuth1Filter"></a>
       <h4 class="signature">
-      <span class="kind">class</span>
-      <span class="symbol"> 
-        <a href="OAuth1Filter.html"><span class="name">OAuth1Filter</span></a>
-        
-        <span class="result"> extends SimpleFilter[HttpRequest, HttpResponse]</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="OAuth1Filter.html"><span class="name">OAuth1Filter</span></a><span class="result"> extends SimpleFilter[HttpRequest, HttpResponse]</span>
       </span>
       </h4>
       
     </li><li visbl="pub" name="com.foursquare.fhttp.Token" data-isabs="false">
       <a id="Token:Token"></a>
       <h4 class="signature">
-      <span class="kind">case class</span>
-      <span class="symbol"> 
-        <a href="Token.html"><span class="name">Token</span></a>
-        
-        <span class="params">(<span name="key">key: String</span>, <span name="secret">secret: String</span>)</span><span class="result"> extends Product with Serializable</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="Token.html"><span class="name">Token</span></a><span class="params">(<span name="key">key: String</span>, <span name="secret">secret: String</span>)</span><span class="result"> extends Product with Serializable</span>
       </span>
       </h4>
       
     </li></ol>
             </div>
-        
+
         
 
         <div class="values members" id="values">
@@ -157,22 +167,36 @@
               <ol><li visbl="pub" name="com.foursquare.fhttp.FHttpRequest" data-isabs="false">
       <a id="FHttpRequest:FHttpRequest"></a>
       <h4 class="signature">
-      <span class="kind">object</span>
-      <span class="symbol"> 
-        <a href="FHttpRequest$.html"><span class="name">FHttpRequest</span></a>
-        
-        <span class="result"> extends Serializable</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="FHttpRequest$.html"><span class="name">FHttpRequest</span></a><span class="result"> extends Serializable</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="com.foursquare.fhttp.FTimer" data-isabs="false">
+      <a id="FTimer:FTimer"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="FTimer$.html"><span class="name">FTimer</span></a><span class="result"> extends AnyRef</span>
       </span>
       </h4>
       
     </li><li visbl="pub" name="com.foursquare.fhttp.MultiPart" data-isabs="false">
       <a id="MultiPart:MultiPart"></a>
       <h4 class="signature">
-      <span class="kind">object</span>
-      <span class="symbol"> 
-        <a href="MultiPart$.html"><span class="name">MultiPart</span></a>
-        
-        <span class="result"> extends Serializable</span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="MultiPart$.html"><span class="name">MultiPart</span></a><span class="result"> extends Serializable</span>
       </span>
       </h4>
       
@@ -180,12 +204,18 @@
             </div>
 
         
+        </div>
 
+        <div id="inheritedMembers">
         
+        </div>
 
       </div>
-      
+
       <div id="tooltip"></div>
-      
+
+      <div id="footer">  </div>
+
+
     </body>
       </html>
