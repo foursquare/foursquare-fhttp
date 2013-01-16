@@ -1,6 +1,6 @@
 name := "foursquare-fhttp"
 
-version := "0.1.6.1"
+version := "0.1.7"
 
 organization := "com.foursquare"
 

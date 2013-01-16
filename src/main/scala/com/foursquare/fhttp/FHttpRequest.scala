@@ -16,7 +16,7 @@ import org.jboss.netty.handler.codec.http._
 import scala.collection.JavaConversions._
 
 
-object FHttpRequest { 
+object FHttpRequest {
   type HttpOption = HttpMessage => Unit
 
   val UTF_8 = Charset.forName("UTF-8")
@@ -28,7 +28,7 @@ object FHttpRequest {
     p
   }
 
-  def apply(client: FHttpClient, uri: String): FHttpRequest = 
+  def apply(client: FHttpClient, uri: String): FHttpRequest =
     FHttpRequest(client,
              uri,
              "",
@@ -112,10 +112,10 @@ object FHttpRequest {
 /**
  * An HTTP request
  */
-case class FHttpRequest ( client: FHttpClient, 
+case class FHttpRequest ( client: FHttpClient,
                           uri: String,
                           traceName: String,
-                          service: Service[HttpRequest, HttpResponse], 
+                          service: Service[HttpRequest, HttpResponse],
                           options: List[FHttpRequest.HttpOption]) {
 
   /**
@@ -145,7 +145,7 @@ case class FHttpRequest ( client: FHttpClient,
   /**
    * Sets the keep alive header of the request (useful for HTTP 1.0)
    */
-  def keepAlive(isKeepAlive: Boolean): FHttpRequest = 
+  def keepAlive(isKeepAlive: Boolean): FHttpRequest =
     option((r: HttpMessage) => HttpHeaders.setKeepAlive(r, isKeepAlive))
 
   /**
@@ -158,7 +158,7 @@ case class FHttpRequest ( client: FHttpClient,
    * Adds headers to the request
    * @param p The headers to add
    */
-  def headers(h: List[(String, String)]): FHttpRequest = 
+  def headers(h: List[(String, String)]): FHttpRequest =
     option((r: HttpMessage) => h.foreach(kv => r.addHeader(kv._1, kv._2)))
 
   /**
@@ -172,14 +172,14 @@ case class FHttpRequest ( client: FHttpClient,
    * Adds a filter to the service
    * @param f the filter to add to the stack
    */
-  def filter(f: Filter[HttpRequest, HttpResponse, HttpRequest, HttpResponse]): FHttpRequest = 
+  def filter(f: Filter[HttpRequest, HttpResponse, HttpRequest, HttpResponse]): FHttpRequest =
     FHttpRequest(client, uri, traceName, f andThen service, options)
 
   /**
    * Adds a request timeout (using the TimeoutFilter) to the stack.  Applies blocking or future responses.
    * @param millis The number of milliseconds to wait
    */
-  def timeout(millis: Int) = 
+  def timeout(millis: Int) =
     filter(new TimeoutFilter(millis.milliseconds, FTimer.finagleTimer))
 
   /**
@@ -224,7 +224,7 @@ case class FHttpRequest ( client: FHttpClient,
       case _ => None
     }
 
-    filter(new OAuth1Filter(client.scheme, 
+    filter(new OAuth1Filter(client.scheme,
                             hostPort.get._1,
                             hostPort.get._2.toInt,
                             consumer,
@@ -234,7 +234,7 @@ case class FHttpRequest ( client: FHttpClient,
 
   def hasParams: Boolean = uri.indexOf('?') != -1
 
-  def paramList: List[(String, String)] = 
+  def paramList: List[(String, String)] =
     new QueryStringDecoder(uri).getParameters.map(kv => kv._2.toList.map(v=>(kv._1, v))).flatten.toList
 
 
@@ -244,15 +244,15 @@ case class FHttpRequest ( client: FHttpClient,
    * Issue a non-blocking GET request
    * @param resMap a function to convert the HttpResponse to the desired response type
    */
-  def getFuture[T] (resMap: HttpResponse => T = FHttpRequest.asString): Future[T] = 
+  def getFuture[T] (resMap: HttpResponse => T = FHttpRequest.asString): Future[T] =
     process(HttpMethod.GET, f => f.map(resMap))
-  
+
   /**
    * Issue a non-blocking POST request
    * @param data The content to provide in the message
    * @param resMap A function to convert the HttpResponse to the desired response type
    */
-  def postFuture[T] (data: Array[Byte], resMap: HttpResponse => T): Future[T] = 
+  def postFuture[T] (data: Array[Byte], resMap: HttpResponse => T): Future[T] =
     prepPost(data).process(HttpMethod.POST, f => f.map(resMap))
 
   /**
@@ -260,7 +260,7 @@ case class FHttpRequest ( client: FHttpClient,
    * @param data The content to provide in the message
    * @param resMap A function to convert the HttpResponse to the desired response type
    */
-  def postFuture[T] (data: String = "", resMap: HttpResponse => T = FHttpRequest.asString): Future[T] = 
+  def postFuture[T] (data: String = "", resMap: HttpResponse => T = FHttpRequest.asString): Future[T] =
     postFuture(data.getBytes(FHttpRequest.UTF_8), resMap)
 
   /**
@@ -276,7 +276,7 @@ case class FHttpRequest ( client: FHttpClient,
    * @param data The content to provide in the message
    * @param resMap A function to convert the HttpResponse to the desired response type
    */
-  def putFuture[T] (data: Array[Byte], resMap: HttpResponse => T): Future[T] = 
+  def putFuture[T] (data: Array[Byte], resMap: HttpResponse => T): Future[T] =
     prepPost(data).process(HttpMethod.PUT, f => f.map(resMap))
 
   /**
@@ -284,7 +284,7 @@ case class FHttpRequest ( client: FHttpClient,
    * @param data The content to provide in the message
    * @param resMap A function to convert the HttpResponse to the desired response type
    */
-  def putFuture[T] (data: String = "", resMap: HttpResponse => T = FHttpRequest.asString): Future[T] = 
+  def putFuture[T] (data: String = "", resMap: HttpResponse => T = FHttpRequest.asString): Future[T] =
     putFuture(data.getBytes(FHttpRequest.UTF_8), resMap)
 
   /**
@@ -299,14 +299,14 @@ case class FHttpRequest ( client: FHttpClient,
    * Issue a non-blocking HEAD request
    * @param resMap a function to convert the HttpResponse to the desired response type
    */
-  def headFuture[T] (resMap: HttpResponse => T = FHttpRequest.asString): Future[T] = 
+  def headFuture[T] (resMap: HttpResponse => T = FHttpRequest.asString): Future[T] =
     process(HttpMethod.HEAD, f => f.map(resMap))
 
   /**
    * Issue a non-blocking DELETE request
    * @param resMap a function to convert the HttpResponse to the desired response type
    */
-  def deleteFuture[T] (resMap: HttpResponse => T = FHttpRequest.asString): Future[T] = 
+  def deleteFuture[T] (resMap: HttpResponse => T = FHttpRequest.asString): Future[T] =
     process(HttpMethod.DELETE, f => f.map(resMap))
 
 
@@ -315,7 +315,7 @@ case class FHttpRequest ( client: FHttpClient,
    * Issue a blocking GET request
    * @param resMap a function to convert the HttpResponse to the desired response type
    */
-  def getOption[T] (resMap: HttpResponse => T = FHttpRequest.asString): Option[T] = 
+  def getOption[T] (resMap: HttpResponse => T = FHttpRequest.asString): Option[T] =
     process(HttpMethod.GET, block) match {
       case ClientResponse(response: HttpResponse) => Some(resMap(response))
       case _ => None
@@ -326,7 +326,7 @@ case class FHttpRequest ( client: FHttpClient,
    * @param data The content to provide in the message
    * @param resMap A function to convert the HttpResponse to the desired response type
    */
-  def postOption[T] (data: Array[Byte], resMap: HttpResponse => T): Option[T] = 
+  def postOption[T] (data: Array[Byte], resMap: HttpResponse => T): Option[T] =
     prepPost(data).process(HttpMethod.POST, block) match {
       case ClientResponse(response: HttpResponse) => Some(resMap(response))
       case _ => None
@@ -337,7 +337,7 @@ case class FHttpRequest ( client: FHttpClient,
    * @param data The content to provide in the message
    * @param resMap A function to convert the HttpResponse to the desired response type
    */
-  def postOption[T] (data: String = "", resMap: HttpResponse => T = FHttpRequest.asString): Option[T] = 
+  def postOption[T] (data: String = "", resMap: HttpResponse => T = FHttpRequest.asString): Option[T] =
     postOption(data.getBytes(FHttpRequest.UTF_8), resMap)
 
   /**
@@ -356,7 +356,7 @@ case class FHttpRequest ( client: FHttpClient,
    * @param data The content to provide in the message
    * @param resMap A function to convert the HttpResponse to the desired response type
    */
-  def putOption[T] (data: Array[Byte], resMap: HttpResponse => T): Option[T] = 
+  def putOption[T] (data: Array[Byte], resMap: HttpResponse => T): Option[T] =
     prepPost(data).process(HttpMethod.PUT, block) match {
       case ClientResponse(response: HttpResponse) => Some(resMap(response))
       case _ => None
@@ -367,7 +367,7 @@ case class FHttpRequest ( client: FHttpClient,
    * @param data The content to provide in the message
    * @param resMap A function to convert the HttpResponse to the desired response type
    */
-  def putOption[T] (data: String = "", resMap: HttpResponse => T = FHttpRequest.asString): Option[T] = 
+  def putOption[T] (data: String = "", resMap: HttpResponse => T = FHttpRequest.asString): Option[T] =
     putOption(data.getBytes(FHttpRequest.UTF_8), resMap)
 
   /**
@@ -385,7 +385,7 @@ case class FHttpRequest ( client: FHttpClient,
    * Issue a blocking HEAD request
    * @param resMap a function to convert the HttpResponse to the desired response type
    */
-  def headOption[T] (resMap: HttpResponse => T = FHttpRequest.asString): Option[T] = 
+  def headOption[T] (resMap: HttpResponse => T = FHttpRequest.asString): Option[T] =
     process(HttpMethod.HEAD, block) match {
       case ClientResponse(response: HttpResponse) => Some(resMap(response))
       case _ => None
@@ -395,7 +395,7 @@ case class FHttpRequest ( client: FHttpClient,
    * Issue a blocking DELETE request
    * @param resMap a function to convert the HttpResponse to the desired response type
    */
-  def deleteOption[T] (resMap: HttpResponse => T = FHttpRequest.asString): Option[T] = 
+  def deleteOption[T] (resMap: HttpResponse => T = FHttpRequest.asString): Option[T] =
     process(HttpMethod.DELETE, block) match {
       case ClientResponse(response: HttpResponse) => Some(resMap(response))
       case _ => None
@@ -407,18 +407,18 @@ case class FHttpRequest ( client: FHttpClient,
    * Issue a blocking GET request and throw on failure
    * @param resMap a function to convert the HttpResponse to the desired response type
    */
-  def get_![T] (resMap: HttpResponse => T = FHttpRequest.asString): T = 
+  def get_![T] (resMap: HttpResponse => T = FHttpRequest.asString): T =
     process(HttpMethod.GET, block) match {
       case ClientResponse(response: HttpResponse) => resMap(response)
       case ClientException(e) => throw e
     }
-  
+
   /**
    * Issue a blocking POST request and throw on failure
    * @param data The content to provide in the message
    * @param resMap A function to convert the HttpResponse to the desired response type
    */
-  def post_![T] (data: Array[Byte], resMap: HttpResponse => T): T = 
+  def post_![T] (data: Array[Byte], resMap: HttpResponse => T): T =
     prepPost(data).process(HttpMethod.POST, block) match {
       case ClientResponse(response: HttpResponse) => resMap(response)
       case ClientException(e) => throw e
@@ -429,7 +429,7 @@ case class FHttpRequest ( client: FHttpClient,
    * @param data The content to provide in the message
    * @param resMap A function to convert the HttpResponse to the desired response type
    */
-  def post_![T] (data: String = "", resMap: HttpResponse => T = FHttpRequest.asString): T = 
+  def post_![T] (data: String = "", resMap: HttpResponse => T = FHttpRequest.asString): T =
     post_!(data.getBytes(FHttpRequest.UTF_8), resMap)
 
   /**
@@ -437,7 +437,7 @@ case class FHttpRequest ( client: FHttpClient,
    * @param data The parts to provide in the multipart message
    * @param resMap A function to convert the HttpResponse to the desired response type
    */
-  def post_![T] (data: List[MultiPart], resMap: HttpResponse => T): T = 
+  def post_![T] (data: List[MultiPart], resMap: HttpResponse => T): T =
     prepMultipart(data.map(toPart(_))).process(HttpMethod.POST, block) match {
       case ClientResponse(response: HttpResponse) => resMap(response)
       case ClientException(e) => throw e
@@ -448,7 +448,7 @@ case class FHttpRequest ( client: FHttpClient,
    * @param data The content to provide in the message
    * @param resMap A function to convert the HttpResponse to the desired response type
    */
-  def put_![T] (data: Array[Byte], resMap: HttpResponse => T): T = 
+  def put_![T] (data: Array[Byte], resMap: HttpResponse => T): T =
     prepPost(data).process(HttpMethod.PUT, block) match {
       case ClientResponse(response: HttpResponse) => resMap(response)
       case ClientException(e) => throw e
@@ -459,7 +459,7 @@ case class FHttpRequest ( client: FHttpClient,
    * @param data The content to provide in the message
    * @param resMap A function to convert the HttpResponse to the desired response type
    */
-  def put_![T] (data: String = "", resMap: HttpResponse => T = FHttpRequest.asString): T = 
+  def put_![T] (data: String = "", resMap: HttpResponse => T = FHttpRequest.asString): T =
     put_!(data.getBytes(FHttpRequest.UTF_8), resMap)
 
   /**
@@ -467,7 +467,7 @@ case class FHttpRequest ( client: FHttpClient,
    * @param data The parts to provide in the multipart message
    * @param resMap A function to convert the HttpResponse to the desired response type
    */
-  def put_![T] (data: List[MultiPart], resMap: HttpResponse => T): T = 
+  def put_![T] (data: List[MultiPart], resMap: HttpResponse => T): T =
     prepMultipart(data.map(toPart(_))).process(HttpMethod.PUT, block) match {
       case ClientResponse(response: HttpResponse) => resMap(response)
       case ClientException(e) => throw e
@@ -477,7 +477,7 @@ case class FHttpRequest ( client: FHttpClient,
    * Issue a blocking HEAD request and throw on failure
    * @param resMap a function to convert the HttpResponse to the desired response type
    */
-  def head_![T] (resMap: HttpResponse => T = FHttpRequest.asString): T = 
+  def head_![T] (resMap: HttpResponse => T = FHttpRequest.asString): T =
     process(HttpMethod.HEAD, block) match {
       case ClientResponse(response: HttpResponse) => resMap(response)
       case ClientException(e) => throw e
@@ -487,7 +487,7 @@ case class FHttpRequest ( client: FHttpClient,
    * Issue a blocking DELETE request and throw on failure
    * @param resMap a function to convert the HttpResponse to the desired response type
    */
-  def delete_![T] (resMap: HttpResponse => T = FHttpRequest.asString): T = 
+  def delete_![T] (resMap: HttpResponse => T = FHttpRequest.asString): T =
     process(HttpMethod.DELETE, block) match {
       case ClientResponse(response: HttpResponse) => resMap(response)
       case ClientException(e) => throw e
@@ -505,13 +505,13 @@ case class FHttpRequest ( client: FHttpClient,
   protected def process[T] (method: HttpMethod, processor: Future[HttpResponse] => T): T = {
     val uriObj = new java.net.URI(uri)
     val req = new DefaultHttpRequest(HttpVersion.HTTP_1_1,
-                                     method, 
+                                     method,
                                      uri.substring(uri.indexOf(uriObj.getPath)))
     options.reverse.foreach(_(req))
     processor(service(req))
   }
 
-  protected val block: Future[HttpResponse] => ClientResponseOrException = 
+  protected val block: Future[HttpResponse] => ClientResponseOrException =
     responseFuture => {
       try{
         val r = responseFuture.apply
@@ -537,9 +537,9 @@ case class FHttpRequest ( client: FHttpClient,
   }
 
   protected def toPart(part: MultiPart) = {
-    new FilePart(part.name, 
-      new ByteArrayPartSource(part.filename, part.data), 
-      part.mime, 
+    new FilePart(part.name,
+      new ByteArrayPartSource(part.filename, part.data),
+      part.mime,
       FHttpRequest.UTF_8.name)
   }
 
@@ -558,8 +558,8 @@ case class FHttpRequest ( client: FHttpClient,
     prepData(os.buffer.toByteBuffer.array)
       .contentType("multipart/form-data; boundary=" + FHttpRequest.BOUNDARY)
       .headers("MIME-Version" -> "1.0")
-  
-  } 
+
+  }
 
   protected def prepData(data: Array[Byte]) = {
     content(data)
@@ -573,7 +573,7 @@ case class FHttpRequest ( client: FHttpClient,
 
 case class HttpStatusException(code: Int, reason: String, response: HttpResponse) extends RuntimeException {
   var clientId = ""
-  def addName(name: String) = { 
+  def addName(name: String) = {
     clientId = " in " + name
     this
   }
@@ -592,7 +592,7 @@ case class ClientException(exception: Throwable) extends ClientResponseOrExcepti
 
 
 object MultiPart {
-  def apply(name: String, filename: String, mime: String, data: String): MultiPart = 
+  def apply(name: String, filename: String, mime: String, data: String): MultiPart =
     MultiPart(name, filename, mime, data.getBytes(FHttpRequest.UTF_8))
 }
 
