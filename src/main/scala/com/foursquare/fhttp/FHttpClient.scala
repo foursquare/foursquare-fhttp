@@ -15,16 +15,16 @@ class FHttpClient ( val name: String,
                     val hostPort: String, // host:port
                     builder: ClientBuilder[HttpRequest, HttpResponse, Nothing, Yes, Yes] =
                       ClientBuilder().codec(Http()).tcpConnectTimeout(1.second).hostConnectionLimit(1)) {
-  
+
   object throwHttpErrorsFilter extends SimpleFilter[HttpRequest, HttpResponse] {
     def apply(request: HttpRequest, service: Service[HttpRequest, HttpResponse]) = {
       // flatMap asynchronously responds to requests and can "map" them to both
       // success and failure values:
       service(request) flatMap { response =>
         response.getStatus.getCode match {
-          case x if (x >= 200 && x < 300) => 
+          case x if (x >= 200 && x < 300) =>
             Future.value(response)
-          case code => 
+          case code =>
             Future.exception(HttpStatusException(code, response.getStatus.getReasonPhrase, response).addName(name))
         }
       }

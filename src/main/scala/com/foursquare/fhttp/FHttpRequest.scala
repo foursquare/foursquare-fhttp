@@ -410,6 +410,7 @@ case class FHttpRequest ( client: FHttpClient,
   def get_![T] (resMap: HttpResponse => T = FHttpRequest.asString): T =
     process(HttpMethod.GET, block) match {
       case ClientResponse(response: HttpResponse) => resMap(response)
+      case ClientException(e: DeferredStackTrace) => throw e.withNewStackTrace()
       case ClientException(e) => throw e
     }
 
@@ -421,6 +422,7 @@ case class FHttpRequest ( client: FHttpClient,
   def post_![T] (data: Array[Byte], resMap: HttpResponse => T): T =
     prepPost(data).process(HttpMethod.POST, block) match {
       case ClientResponse(response: HttpResponse) => resMap(response)
+      case ClientException(e: DeferredStackTrace) => throw e.withNewStackTrace()
       case ClientException(e) => throw e
     }
 
@@ -440,6 +442,7 @@ case class FHttpRequest ( client: FHttpClient,
   def post_![T] (data: List[MultiPart], resMap: HttpResponse => T): T =
     prepMultipart(data.map(toPart(_))).process(HttpMethod.POST, block) match {
       case ClientResponse(response: HttpResponse) => resMap(response)
+      case ClientException(e: DeferredStackTrace) => throw e.withNewStackTrace()
       case ClientException(e) => throw e
     }
 
@@ -451,6 +454,7 @@ case class FHttpRequest ( client: FHttpClient,
   def put_![T] (data: Array[Byte], resMap: HttpResponse => T): T =
     prepPost(data).process(HttpMethod.PUT, block) match {
       case ClientResponse(response: HttpResponse) => resMap(response)
+      case ClientException(e: DeferredStackTrace) => throw e.withNewStackTrace()
       case ClientException(e) => throw e
     }
 
@@ -470,6 +474,7 @@ case class FHttpRequest ( client: FHttpClient,
   def put_![T] (data: List[MultiPart], resMap: HttpResponse => T): T =
     prepMultipart(data.map(toPart(_))).process(HttpMethod.PUT, block) match {
       case ClientResponse(response: HttpResponse) => resMap(response)
+      case ClientException(e: DeferredStackTrace) => throw e.withNewStackTrace()
       case ClientException(e) => throw e
     }
 
@@ -480,6 +485,7 @@ case class FHttpRequest ( client: FHttpClient,
   def head_![T] (resMap: HttpResponse => T = FHttpRequest.asString): T =
     process(HttpMethod.HEAD, block) match {
       case ClientResponse(response: HttpResponse) => resMap(response)
+      case ClientException(e: DeferredStackTrace) => throw e.withNewStackTrace()
       case ClientException(e) => throw e
     }
 
@@ -490,6 +496,7 @@ case class FHttpRequest ( client: FHttpClient,
   def delete_![T] (resMap: HttpResponse => T = FHttpRequest.asString): T =
     process(HttpMethod.DELETE, block) match {
       case ClientResponse(response: HttpResponse) => resMap(response)
+      case ClientException(e: DeferredStackTrace) => throw e.withNewStackTrace()
       case ClientException(e) => throw e
     }
 
@@ -570,8 +577,17 @@ case class FHttpRequest ( client: FHttpClient,
 
 }
 
+trait DeferredStackTrace extends RuntimeException {
+  override def fillInStackTrace = this
 
-case class HttpStatusException(code: Int, reason: String, response: HttpResponse) extends RuntimeException {
+  def withNewStackTrace() = {
+    super.fillInStackTrace()
+    this
+  }
+}
+
+case class HttpStatusException(code: Int, reason: String, response: HttpResponse)
+  extends RuntimeException with DeferredStackTrace {
   var clientId = ""
   def addName(name: String) = {
     clientId = " in " + name
