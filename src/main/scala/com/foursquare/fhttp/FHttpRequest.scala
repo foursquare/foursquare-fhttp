@@ -3,7 +3,7 @@
 package com.foursquare.fhttp
 
 import com.twitter.conversions.time._
-import com.twitter.finagle.{Filter, Service, SimpleFilter}
+import com.twitter.finagle.{Filter, NoStacktrace, Service, SimpleFilter}
 import com.twitter.finagle.service.TimeoutFilter
 import com.twitter.util.Future
 import java.nio.charset.Charset
@@ -483,13 +483,19 @@ case class FHttpRequest ( client: FHttpClient,
   protected val finishBang: ClientResponseOrException => HttpResponse = _ match {
     case ClientResponse(response: HttpResponse) => response
     case ClientException(e: DeferredStackTrace) => throw e.withNewStackTrace()
-    case ClientException(e) => throw e
-  } 
+    case ClientException(e) => e match {
+      case ns: NoStacktrace => {
+        ns.setStackTrace(new Throwable().getStackTrace)
+        throw ns
+      }
+      case s => throw s.fillInStackTrace
+    }
+  }
 
   protected val finishOpt: ClientResponseOrException => Option[HttpResponse] = _ match {
     case ClientResponse(response: HttpResponse) => Some(response)
     case _ => None
-  } 
+  }
 
   protected def prepPost(data: Array[Byte]) = {
     // If there is no data, but params,
