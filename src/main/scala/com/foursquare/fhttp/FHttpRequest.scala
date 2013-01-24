@@ -316,10 +316,7 @@ case class FHttpRequest ( client: FHttpClient,
    * @param resMap a function to convert the HttpResponse to the desired response type
    */
   def getOption[T] (resMap: HttpResponse => T = FHttpRequest.asString): Option[T] =
-    process(HttpMethod.GET, block) match {
-      case ClientResponse(response: HttpResponse) => Some(resMap(response))
-      case _ => None
-    }
+    process(HttpMethod.GET, block andThen finishOpt).map(resMap)
 
   /**
    * Issue a blocking POST request
@@ -327,10 +324,7 @@ case class FHttpRequest ( client: FHttpClient,
    * @param resMap A function to convert the HttpResponse to the desired response type
    */
   def postOption[T] (data: Array[Byte], resMap: HttpResponse => T): Option[T] =
-    prepPost(data).process(HttpMethod.POST, block) match {
-      case ClientResponse(response: HttpResponse) => Some(resMap(response))
-      case _ => None
-    }
+    prepPost(data).process(HttpMethod.POST, block andThen finishOpt).map(resMap)
 
   /**
    * Issue a blocking POST request
@@ -346,10 +340,7 @@ case class FHttpRequest ( client: FHttpClient,
    * @param resMap A function to convert the HttpResponse to the desired response type
    */
   def postOption[T] (data: List[MultiPart], resMap: HttpResponse => T): Option[T] =
-    prepMultipart(data.map(toPart(_))).process(HttpMethod.POST, block) match {
-      case ClientResponse(response: HttpResponse) => Some(resMap(response))
-      case _ => None
-    }
+    prepMultipart(data.map(toPart(_))).process(HttpMethod.POST, block andThen finishOpt).map(resMap)
 
   /**
    * Issue a blocking PUT request
@@ -357,10 +348,7 @@ case class FHttpRequest ( client: FHttpClient,
    * @param resMap A function to convert the HttpResponse to the desired response type
    */
   def putOption[T] (data: Array[Byte], resMap: HttpResponse => T): Option[T] =
-    prepPost(data).process(HttpMethod.PUT, block) match {
-      case ClientResponse(response: HttpResponse) => Some(resMap(response))
-      case _ => None
-    }
+    prepPost(data).process(HttpMethod.PUT, block andThen finishOpt).map(resMap)
 
   /**
    * Issue a blocking PUT request
@@ -376,31 +364,21 @@ case class FHttpRequest ( client: FHttpClient,
    * @param resMap A function to convert the HttpResponse to the desired response type
    */
   def putOption[T] (data: List[MultiPart], resMap: HttpResponse => T): Option[T] =
-    prepMultipart(data.map(toPart(_))).process(HttpMethod.PUT, block) match {
-      case ClientResponse(response: HttpResponse) => Some(resMap(response))
-      case _ => None
-    }
+    prepMultipart(data.map(toPart(_))).process(HttpMethod.PUT, block andThen finishOpt).map(resMap)
 
   /**
    * Issue a blocking HEAD request
    * @param resMap a function to convert the HttpResponse to the desired response type
    */
   def headOption[T] (resMap: HttpResponse => T = FHttpRequest.asString): Option[T] =
-    process(HttpMethod.HEAD, block) match {
-      case ClientResponse(response: HttpResponse) => Some(resMap(response))
-      case _ => None
-    }
+    process(HttpMethod.HEAD, block andThen finishOpt).map(resMap)
 
   /**
    * Issue a blocking DELETE request
    * @param resMap a function to convert the HttpResponse to the desired response type
    */
   def deleteOption[T] (resMap: HttpResponse => T = FHttpRequest.asString): Option[T] =
-    process(HttpMethod.DELETE, block) match {
-      case ClientResponse(response: HttpResponse) => Some(resMap(response))
-      case _ => None
-    }
-
+    process(HttpMethod.DELETE, block andThen finishOpt).map(resMap)
 
   // Blocking Throw
   /**
@@ -408,11 +386,7 @@ case class FHttpRequest ( client: FHttpClient,
    * @param resMap a function to convert the HttpResponse to the desired response type
    */
   def get_![T] (resMap: HttpResponse => T = FHttpRequest.asString): T =
-    process(HttpMethod.GET, block) match {
-      case ClientResponse(response: HttpResponse) => resMap(response)
-      case ClientException(e: DeferredStackTrace) => throw e.withNewStackTrace()
-      case ClientException(e) => throw e
-    }
+    process(HttpMethod.GET, block andThen finishBang andThen resMap)
 
   /**
    * Issue a blocking POST request and throw on failure
@@ -420,11 +394,7 @@ case class FHttpRequest ( client: FHttpClient,
    * @param resMap A function to convert the HttpResponse to the desired response type
    */
   def post_![T] (data: Array[Byte], resMap: HttpResponse => T): T =
-    prepPost(data).process(HttpMethod.POST, block) match {
-      case ClientResponse(response: HttpResponse) => resMap(response)
-      case ClientException(e: DeferredStackTrace) => throw e.withNewStackTrace()
-      case ClientException(e) => throw e
-    }
+    prepPost(data).process(HttpMethod.POST, block andThen finishBang andThen resMap)
 
   /**
    * Issue a blocking POST request and throw on failure
@@ -440,11 +410,7 @@ case class FHttpRequest ( client: FHttpClient,
    * @param resMap A function to convert the HttpResponse to the desired response type
    */
   def post_![T] (data: List[MultiPart], resMap: HttpResponse => T): T =
-    prepMultipart(data.map(toPart(_))).process(HttpMethod.POST, block) match {
-      case ClientResponse(response: HttpResponse) => resMap(response)
-      case ClientException(e: DeferredStackTrace) => throw e.withNewStackTrace()
-      case ClientException(e) => throw e
-    }
+    prepMultipart(data.map(toPart(_))).process(HttpMethod.POST, block andThen finishBang andThen resMap)
 
   /**
    * Issue a blocking PUT request and throw on failure
@@ -452,11 +418,7 @@ case class FHttpRequest ( client: FHttpClient,
    * @param resMap A function to convert the HttpResponse to the desired response type
    */
   def put_![T] (data: Array[Byte], resMap: HttpResponse => T): T =
-    prepPost(data).process(HttpMethod.PUT, block) match {
-      case ClientResponse(response: HttpResponse) => resMap(response)
-      case ClientException(e: DeferredStackTrace) => throw e.withNewStackTrace()
-      case ClientException(e) => throw e
-    }
+    prepPost(data).process(HttpMethod.PUT, block andThen finishBang andThen resMap)
 
   /**
    * Issue a blocking PUT request and throw on failure
@@ -472,33 +434,21 @@ case class FHttpRequest ( client: FHttpClient,
    * @param resMap A function to convert the HttpResponse to the desired response type
    */
   def put_![T] (data: List[MultiPart], resMap: HttpResponse => T): T =
-    prepMultipart(data.map(toPart(_))).process(HttpMethod.PUT, block) match {
-      case ClientResponse(response: HttpResponse) => resMap(response)
-      case ClientException(e: DeferredStackTrace) => throw e.withNewStackTrace()
-      case ClientException(e) => throw e
-    }
+    prepMultipart(data.map(toPart(_))).process(HttpMethod.PUT, block andThen finishBang andThen resMap)
 
   /**
    * Issue a blocking HEAD request and throw on failure
    * @param resMap a function to convert the HttpResponse to the desired response type
    */
   def head_![T] (resMap: HttpResponse => T = FHttpRequest.asString): T =
-    process(HttpMethod.HEAD, block) match {
-      case ClientResponse(response: HttpResponse) => resMap(response)
-      case ClientException(e: DeferredStackTrace) => throw e.withNewStackTrace()
-      case ClientException(e) => throw e
-    }
+    process(HttpMethod.HEAD, block andThen finishBang andThen resMap)
 
   /**
    * Issue a blocking DELETE request and throw on failure
    * @param resMap a function to convert the HttpResponse to the desired response type
    */
   def delete_![T] (resMap: HttpResponse => T = FHttpRequest.asString): T =
-    process(HttpMethod.DELETE, block) match {
-      case ClientResponse(response: HttpResponse) => resMap(response)
-      case ClientException(e: DeferredStackTrace) => throw e.withNewStackTrace()
-      case ClientException(e) => throw e
-    }
+    process(HttpMethod.DELETE, block andThen finishBang andThen resMap)
 
   // Request issuing internals
 
@@ -529,6 +479,17 @@ case class FHttpRequest ( client: FHttpClient,
         }
       }
     }
+
+  protected val finishBang: ClientResponseOrException => HttpResponse = _ match {
+    case ClientResponse(response: HttpResponse) => response
+    case ClientException(e: DeferredStackTrace) => throw e.withNewStackTrace()
+    case ClientException(e) => throw e
+  } 
+
+  protected val finishOpt: ClientResponseOrException => Option[HttpResponse] = _ match {
+    case ClientResponse(response: HttpResponse) => Some(response)
+    case _ => None
+  } 
 
   protected def prepPost(data: Array[Byte]) = {
     // If there is no data, but params,
@@ -613,4 +574,3 @@ object MultiPart {
 }
 
 case class MultiPart(val name: String, val filename: String, val mime: String, val data: Array[Byte])
-
