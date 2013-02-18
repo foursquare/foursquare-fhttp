@@ -564,7 +564,7 @@ case class HttpStatusException(code: Int, reason: String, response: HttpResponse
   def asString: String = FHttpRequest.asString(response)
 
   override def getMessage(): String = {
-    return "HttpStatusException%s: Code: %d Reason: %s" format(clientId, code, reason)
+    return "HttpStatusException%s: Code: %d Reason: %s Body: %s" format(clientId, code, reason, asString)
   }
 }
 
