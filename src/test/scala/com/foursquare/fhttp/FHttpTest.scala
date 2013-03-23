@@ -105,7 +105,7 @@ class FHttpClientTest extends SpecsMatchers {
 
   @After
   def teardownHelper {
-    client.service.release()
+    client.service.close()
     helper.server.close()
   }
 

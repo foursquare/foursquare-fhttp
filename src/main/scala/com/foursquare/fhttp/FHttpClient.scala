@@ -43,7 +43,7 @@ class FHttpClient ( val name: String,
   def service: Service[HttpRequest, HttpResponse] = baseService
 
   def release() {
-    baseService.release()
+    baseService.close()
   }
 
   def releaseOnShutdown(): FHttpClient = {

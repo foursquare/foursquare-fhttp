@@ -8,8 +8,8 @@ crossScalaVersions := Seq("2.9.1", "2.9.2")
 
 libraryDependencies <++= (scalaVersion) { scalaVersion =>
   Seq(
-    "com.twitter"                   %  "finagle-core"       % "5.3.23",
-    "com.twitter"                   %  "finagle-http"       % "5.3.23",
+    "com.twitter"                   %  "finagle-core"       % "6.1.2",
+    "com.twitter"                   %  "finagle-http"       % "6.1.2",
     "commons-httpclient"            %  "commons-httpclient" % "3.1",
     "junit"                         %  "junit"              % "4.10"       % "test",
     "com.novocode"                  %  "junit-interface"    % "0.9"        % "test",
