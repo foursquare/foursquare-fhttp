@@ -6,6 +6,7 @@ import com.twitter.finagle.{Service, SimpleFilter}
 import com.twitter.util.Throw
 import org.jboss.netty.handler.codec.http._
 import scala.collection.JavaConversions._
+import java.util.UUID
 import javax.crypto.Mac
 import javax.crypto.SecretKey
 import javax.crypto.spec.SecretKeySpec
@@ -19,17 +20,22 @@ class OAuth1Filter (scheme: String,
                     port: Int,
                     consumer: Token,
                     token: Option[Token],
-                    verifier: Option[String]) extends SimpleFilter[HttpRequest, HttpResponse] {
+                    verifier: Option[String],
+                    // parameterize clock/nonce for testing
+                    clock: Function0[Long] = () => System.currentTimeMillis,
+                    nonce: Function0[String] = () => UUID.randomUUID.toString)
+  extends SimpleFilter[HttpRequest, HttpResponse] {
+
+  val MAC = "HmacSHA1"
+  val PostParamsType = "application/x-www-form-urlencoded"
 
   def apply(request: HttpRequest, service: Service[HttpRequest, HttpResponse]) = {
-    val MAC = "HmacSHA1"
 
-    
     // Build parameters
-    val time = System.currentTimeMillis
+    val time = clock()
     var oauthParams: List[(String, String)] =
       ("oauth_timestamp", (time / 1000).toString) ::
-      ("oauth_nonce", System.currentTimeMillis.toString) ::
+      ("oauth_nonce", nonce()) ::
       ("oauth_version", "1.0") ::
       ("oauth_consumer_key", consumer.key) ::
       ("oauth_signature_method", "HMAC-SHA1") :: Nil
@@ -49,30 +55,28 @@ class OAuth1Filter (scheme: String,
       case _ => ":" + port
     }
 
-    val uri = new java.net.URI(request.getUri)
 
-    val reqParams: List[(String,String)] = {
-      val queryString = {
-        if(request.getMethod == HttpMethod.GET) {
-          uri.getQuery
-        } else {
-          request.getContent.toString(FHttpRequest.UTF_8)
-        }
-      }
+    val (path, paramDecoder) = request.getMethod match {
+      case HttpMethod.GET =>
+        val qd = new QueryStringDecoder(request.getUri)
+        (qd.getPath, qd)
+      case HttpMethod.POST if (request.getHeader(HttpHeaders.Names.CONTENT_TYPE) == PostParamsType) =>
+        (
+          request.getUri,
+          new QueryStringDecoder("?" + request.getContent.toString(FHttpRequest.UTF_8))
+        )
+      case _ => (request.getUri, new QueryStringDecoder("?"))
+    }
 
-      Option(queryString).toList. flatMap {
-        _.split("&").flatMap(_.split("=") match {
-          case Array(k,v) => Some(k, v)
-          case _ => None
-        })
-      }
+    val reqParams: List[(String, String)] = paramDecoder.getParameters.toList.flatMap {
+      case (key, values) => values.toList.map(v => (key, v))
     }
 
     val sigParams = reqParams ::: oauthParams
 
     // Normalize
     val normParams = percentEncode(sigParams).sortWith(_ < _).mkString("&")
-    val normUrl = (scheme + "://" + host + portString + uri.getPath).toLowerCase
+    val normUrl = (scheme + "://" + host + portString + path).toLowerCase
     val normReq = List(request.getMethod.getName.toUpperCase, normUrl, normParams).map(percentEncode).mkString("&")
 
     // Sign

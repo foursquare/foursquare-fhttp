@@ -96,6 +96,28 @@ object PortHelper {
 class FHttpClientTest extends SpecsMatchers {
   var helper: FHttpTestHelper = null
   var client: FHttpClient = null
+
+  def buildOAuth1Filter(
+    client: FHttpClient,
+    consumer: Token,
+    token: Option[Token],
+    verifier: Option[String]): OAuth1Filter = {
+
+    val hostPort = client.firstHostPort.split(":", 2) match {
+      case Array(k,v) => Some(k, v)
+      case _ => None
+    }
+
+    new OAuth1Filter(client.scheme,
+      hostPort.get._1,
+      hostPort.get._2.toInt,
+      consumer,
+      token,
+      verifier,
+      () => 0,
+      () => "ceci n'est pas une nonce")
+  }
+
   @Before
   def setupHelper {
     helper = new FHttpTestHelper(PortHelper.port)
@@ -315,15 +337,28 @@ class FHttpClientTest extends SpecsMatchers {
 
       // Try some queries
       val testParamsRes = {
-        val testReq = clientOA("/oauth/example/echo_api").params("k1"->"v1", "k2"->"v2")
+        val testReq = clientOA("/oauth/example/echo_api").params("k1"->"v1", "k2"->"v2", "callback" -> "http://example.com/?p1=v1&p2=v2")
           .oauth(consumer, accessToken)
         if(usePost) testReq.post_!() else testReq.get_!()
       }
-      testParamsRes must_== "k1=v1&k2=v2"
+      testParamsRes must_== "k1=v1&k2=v2&callback=http%3A%2F%2Fexample.com%2F%3Fp1%3Dv1%26p2%3Dv2"
     }
 
     testFlow(false)
     testFlow(true)
   }
 
+  @Test
+  def testOAuthSigning {
+    val consumer = Token("key", "secret")
+    val oauthFilter = buildOAuth1Filter(client, consumer, None, None)
+    val expected = """OAuth oauth_signature="lAkLnsPI449AfTp7yuKJTD7olW8%3D",oauth_timestamp="0",oauth_nonce="ceci%20n%27est%20pas%20une%20nonce",oauth_version="1.0",oauth_consumer_key="key",oauth_signature_method="HMAC-SHA1""""
+    helper.requestValidators = List(FHttpRequestValidators.matchesHeader("Authorization", expected))
+    val res = FHttpRequest(client, "/request_token")
+      .params("callback" -> "http://example.com/callback?some=param&someOther=param")
+      .filter(oauthFilter)
+      .timeout(5000).get_!()
+    res must_== ""
+
+  }
 }
