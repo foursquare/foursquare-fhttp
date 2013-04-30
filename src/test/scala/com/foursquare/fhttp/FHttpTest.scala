@@ -6,7 +6,7 @@ import com.twitter.conversions.time._
 import com.twitter.finagle.builder.{ClientBuilder, ServerBuilder}
 import com.twitter.finagle.http.Http
 import com.twitter.finagle.{Service, TimeoutException}
-import com.twitter.util.Future
+import com.twitter.util.{Await, Future}
 import org.jboss.netty.channel.DefaultChannelConfig
 import org.jboss.netty.handler.codec.http._
 import org.jboss.netty.handler.codec.http.HttpResponseStatus._
@@ -261,7 +261,7 @@ class FHttpClientTest extends SpecsMatchers {
       Thread.sleep(10)
     }
     try {
-      val r = f.get
+      val r = Await.result(f)
       throw new Exception("should have timed out but got " + r)
     } catch {
       case _ => Unit
