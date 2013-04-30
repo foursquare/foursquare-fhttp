@@ -5,7 +5,7 @@ package com.foursquare.fhttp
 import com.twitter.conversions.time._
 import com.twitter.finagle.{Filter, NoStacktrace, Service, SimpleFilter}
 import com.twitter.finagle.service.TimeoutFilter
-import com.twitter.util.Future
+import com.twitter.util.{Await, Future}
 import java.nio.charset.Charset
 import org.apache.commons.codec.binary.Base64
 import org.apache.commons.httpclient.methods.multipart._
@@ -471,7 +471,7 @@ case class FHttpRequest ( client: FHttpClient,
   protected val block: Future[HttpResponse] => ClientResponseOrException =
     responseFuture => {
       try{
-        val r = responseFuture.apply
+        val r = Await.result(responseFuture)
         ClientResponse[HttpResponse](r)
       } catch {
         case e => {
