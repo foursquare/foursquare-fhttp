@@ -190,6 +190,13 @@ case class FHttpRequest ( client: FHttpClient,
     filter(FHttpRequest.debugFilter)
 
   /**
+    *
+    */
+  def debugString() = {
+    client.scheme + "://" + client.firstHostPort + uri
+  }
+
+  /**
    * Adds a pre-filter transformation to the HttpMessage
    * @param o A function to transform the HttpMessage
    */
