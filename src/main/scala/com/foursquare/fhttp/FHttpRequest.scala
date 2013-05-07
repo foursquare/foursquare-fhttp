@@ -189,9 +189,9 @@ case class FHttpRequest ( client: FHttpClient,
   def debug() =
     filter(FHttpRequest.debugFilter)
 
-  /**
-    *
-    */
+  /** 
+   * Returns the request, including scheme, sever, port, and params as a String.
+   */
   def debugString() = {
     client.scheme + "://" + client.firstHostPort + uri
   }
