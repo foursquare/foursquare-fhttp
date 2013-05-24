@@ -166,7 +166,8 @@ case class FHttpRequest ( client: FHttpClient,
    * @param user The username
    * @param password The password
    */
-  def auth(user: String, password: String) = headers("Authorization" -> ("Basic " + base64(user + ":" + password)))
+  def auth(user: String, password: String): FHttpRequest =
+    headers("Authorization" -> ("Basic " + base64(user + ":" + password)))
 
   /**
    * Adds a filter to the service
@@ -179,7 +180,7 @@ case class FHttpRequest ( client: FHttpClient,
    * Adds a request timeout (using the TimeoutFilter) to the stack.  Applies blocking or future responses.
    * @param millis The number of milliseconds to wait
    */
-  def timeout(millis: Int) =
+  def timeout(millis: Int):FHttpRequest =
     filter(new TimeoutFilter(millis.milliseconds, FTimer.finagleTimer))
 
   /**
@@ -190,9 +191,9 @@ case class FHttpRequest ( client: FHttpClient,
     filter(FHttpRequest.debugFilter)
 
   /** 
-   * Returns the request, including scheme, sever, port, and params as a String.
+   * An approximate representation of the full uri: including scheme, sever, port, and params as a string
    */
-  def debugString() = {
+  def fullUri: String = {
     client.scheme + "://" + client.firstHostPort + uri
   }
 
