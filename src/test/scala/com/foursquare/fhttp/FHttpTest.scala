@@ -11,28 +11,30 @@ import org.jboss.netty.channel.DefaultChannelConfig
 import org.jboss.netty.handler.codec.http._
 import org.jboss.netty.handler.codec.http.HttpResponseStatus._
 import org.junit.{After, Before, Test}
-import org.specs._
+import org.junit.Assert._
+import org.junit.matchers.JUnitMatchers._
 import java.net.{InetSocketAddress, SocketAddress}
 import scala.collection.JavaConversions._
 
-object FHttpRequestValidators extends SpecsMatchers  {
+object FHttpRequestValidators {//extends SpecsMatchers  {
   def matchesHeader(key: String, value: String): FHttpRequest.HttpOption = r => {
-    r.getHeaders(key) == null must_== false
-    r.getHeaders(key).mkString("|") must_== value
+    assertNotNull(r.getHeaders(key))
+    assertEquals(r.getHeaders(key).mkString("|"), value)
   }
 
   def matchesContent(content: String, length: Int): FHttpRequest.HttpOption = r => {
     matchesHeader(HttpHeaders.Names.CONTENT_LENGTH, length.toString)(r)
-    r.getContent.toString(FHttpRequest.UTF_8) must_== content
+    assertEquals(r.getContent.toString(FHttpRequest.UTF_8), content)
   }
 
   def containsContent(content: String): FHttpRequest.HttpOption = r => {
-    r.getContent.toString(FHttpRequest.UTF_8) must include(content)
+    val actual = r.getContent.toString(FHttpRequest.UTF_8)
+    assertThat(actual, containsString(content))
   }
 
 }
 
-class FHttpTestHelper (serverPort: Int) extends SpecsMatchers {
+class FHttpTestHelper (serverPort: Int) {//extends SpecsMatchers {
   var serverWaitMillis: Int = 0
   var responseTransforms: List[FHttpRequest.HttpOption] = Nil
   var requestValidators: List[FHttpRequest.HttpOption] = Nil
@@ -61,7 +63,7 @@ class FHttpTestHelper (serverPort: Int) extends SpecsMatchers {
         }
 
       } catch {
-        case exc: specification.FailureExceptionWithResult[_] => 
+        case exc: AssertionError =>
           responseTransforms ::= {
             (r: HttpMessage) => {
               val data = exc.toString.getBytes(FHttpRequest.UTF_8)
@@ -69,8 +71,6 @@ class FHttpTestHelper (serverPort: Int) extends SpecsMatchers {
               HttpHeaders.setContentLength(r, data.length)
             }
           }
-
-        case e => throw e
       }
       Thread.sleep(serverWaitMillis)
       Future(serverResponse)
@@ -93,7 +93,7 @@ object PortHelper {
   var port = 8101
 }
 
-class FHttpClientTest extends SpecsMatchers {
+class FHttpClientTest {
   var helper: FHttpTestHelper = null
   var client: FHttpClient = null
 
@@ -137,16 +137,16 @@ class FHttpClientTest extends SpecsMatchers {
     val expected2 = expected1 + "?this=is%20silly&no=you%2Bare"
     val expected3 = expected2 + "&no=this_is"
     val req1 = client("/test")
-    req1.uri must_== expected1
+    assertEquals(req1.uri, expected1)
 
     val req2 = req1.params("this"->"is silly","no"->"you+are")
-    req2.uri must_== expected2
+    assertEquals(req2.uri, expected2)
     
     // params get appended if called again
     val req3 = req2.params("no"->"this_is")
-    req3.uri must_== expected3
+    assertEquals(req3.uri, expected3)
 
-    req3.params().uri must_== expected3
+    assertEquals(req3.params().uri, expected3)
   }
 
   @Test
@@ -168,26 +168,26 @@ class FHttpClientTest extends SpecsMatchers {
                               helper.requestValidators.tail
     val req3 = req2.headers("city"->"sf")
     val res3 = req3.timeout(5000).get_!()
-    res3 must_== ""
+    assertEquals(res3, "")
 
     // adding a header with the same key appends, not replaces
     helper.requestValidators = FHttpRequestValidators.matchesHeader("Authorization", "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==") ::
                               helper.requestValidators.tail
     val req4 = req3.auth("Aladdin", "open sesame")
     val res4 = req4.timeout(5000).get_!()
-    res4 must_== ""
+    assertEquals(res4, "")
   }
 
   @Test
   def testSetContent {
     helper.requestValidators = FHttpRequestValidators.matchesContent("hi", 2) :: Nil
     val req = FHttpRequest(client, "/test").timeout(5000).post_!("hi")
-    req must_== ""
+    assertEquals(req, "")
 
     // Empty
     helper.requestValidators = FHttpRequestValidators.matchesContent("", 0) :: Nil
     val reqEmpty = FHttpRequest(client, "/test").timeout(5000).post_!("")
-    reqEmpty must_== ""
+    assertEquals(reqEmpty, "")
 
   }
 
@@ -221,7 +221,7 @@ class FHttpClientTest extends SpecsMatchers {
     val reqEmpty = FHttpRequest(client, "/test").params("hi"->"you")
       .timeout(5000)
       .post_!(part1 :: part2 :: Nil, FHttpRequest.asString)
-    reqEmpty must_== ""
+    assertEquals(reqEmpty, "")
   }
 
   @Test 
@@ -229,10 +229,9 @@ class FHttpClientTest extends SpecsMatchers {
     helper.responseStatus = NOT_FOUND
     try {
       val reqNotFound = FHttpRequest(client, "/notfound").timeout(5000).get_!() 
-      throw new Exception("this should not have succeeded")
+      throw new Exception("wrong code")
     } catch {
-      case HttpStatusException(code, reason, response) if (code == NOT_FOUND.getCode)  =>
-      case _ => throw new Exception("wrong code")
+      case HttpStatusException(code, reason, response) if (code == NOT_FOUND.getCode) => Unit
     }
 
   }
@@ -243,8 +242,7 @@ class FHttpClientTest extends SpecsMatchers {
     try {
       val reqTimedOut = FHttpRequest(client, "/timeout").timeout(1).get_!()
     } catch {
-      case e: TimeoutException =>
-      case e => throw new RuntimeException("should have thrown a TimeoutException")
+      case e: TimeoutException => Unit
     }
   }
 
@@ -264,7 +262,7 @@ class FHttpClientTest extends SpecsMatchers {
       val r = Await.result(f)
       throw new Exception("should have timed out but got " + r)
     } catch {
-      case _ => Unit
+      case e: TimeoutException => Unit
     }
   }
 
@@ -290,8 +288,8 @@ class FHttpClientTest extends SpecsMatchers {
       Thread.sleep(10)
     }
 
-    r1 must_== ""
-    r2 must_== 0
+    assertEquals(r1, "")
+    assertEquals(r2, 0)
   }
 
   @Test
@@ -299,12 +297,12 @@ class FHttpClientTest extends SpecsMatchers {
     val port = client.firstHostPort.split(":",2)(1)
     val client2 = new FHttpClient("test-client-2", "localhost:" + port + ",127.0.0.1:" + port)
     helper.requestValidators = List(FHttpRequestValidators.matchesHeader("Host", "localhost:" + port))
-    client2("/test").get_!() must_== ""
+    assertEquals(client2("/test").get_!(), "")
     client2.release()
 
     val client3 = new FHttpClient("test-client-2", "127.0.0.1:" + port + ",localhost:" + port)
     helper.requestValidators = List(FHttpRequestValidators.matchesHeader("Host", "127.0.0.1:" + port))
-    client3("/test").get_!() must_== ""
+    assertEquals(client3("/test").get_!(), "")
     client3.release()
   }
 
@@ -341,7 +339,7 @@ class FHttpClientTest extends SpecsMatchers {
           .oauth(consumer, accessToken)
         if(usePost) testReq.post_!() else testReq.get_!()
       }
-      testParamsRes must_== "k1=v1&k2=v2&callback=http%3A%2F%2Fexample.com%2F%3Fp1%3Dv1%26p2%3Dv2"
+      assertEquals(testParamsRes, "k1=v1&k2=v2&callback=http%3A%2F%2Fexample.com%2F%3Fp1%3Dv1%26p2%3Dv2")
     }
 
     testFlow(false)
@@ -358,7 +356,6 @@ class FHttpClientTest extends SpecsMatchers {
       .params("callback" -> "http://example.com/callback?some=param&someOther=param")
       .filter(oauthFilter)
       .timeout(5000).get_!()
-    res must_== ""
-
+    assertEquals(res, "")
   }
 }

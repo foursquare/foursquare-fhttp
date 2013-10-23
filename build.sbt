@@ -1,23 +1,24 @@
 name := "foursquare-fhttp"
 
-version := "0.1.9.3"
+version := "0.1.11"
 
 organization := "com.foursquare"
 
-crossScalaVersions := Seq("2.9.1", "2.9.2")
+crossScalaVersions := Seq("2.9.2", "2.10.2")
 
 libraryDependencies <++= (scalaVersion) { scalaVersion =>
+  val v = scalaVersion match {
+    case twoTen if scalaVersion.startsWith("2.10") => "_2.10"
+    case _ => "_" + scalaVersion
+  }
   Seq(
-    "com.twitter"                   %  "finagle-core"       % "6.4.0",
-    "com.twitter"                   %  "finagle-http"       % "6.4.0",
+    "com.twitter"                   %  ("finagle-http" + v) % "6.6.2",
     "commons-httpclient"            %  "commons-httpclient" % "3.1",
     "junit"                         %  "junit"              % "4.10"       % "test",
-    "com.novocode"                  %  "junit-interface"    % "0.9"        % "test",
-    "org.scala-tools.testing"       %  "specs_2.9.1"        % "1.6.9"      % "test"
+    "com.novocode"                  %  "junit-interface"    % "0.9"        % "test"
   )
 }
 
-resolvers += "twitter mvn" at "http://maven.twttr.com"
 
 scalacOptions ++= Seq("-deprecation", "-unchecked")
 
