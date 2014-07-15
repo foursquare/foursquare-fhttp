@@ -39,16 +39,16 @@ class OAuth1Filter (scheme: String,
       ("oauth_version", "1.0") ::
       ("oauth_consumer_key", consumer.key) ::
       ("oauth_signature_method", "HMAC-SHA1") :: Nil
-    
+
 
     token.foreach{t =>
       oauthParams ::= ("oauth_token", t.key)
     }
-    
+
     verifier.foreach{v =>
       oauthParams ::= ("oauth_verifier", v)
     }
-    
+
     val portString = (port, scheme.toLowerCase) match {
       case (80, "http") => ""
       case (443, "https") => ""
@@ -60,7 +60,7 @@ class OAuth1Filter (scheme: String,
       case HttpMethod.GET =>
         val qd = new QueryStringDecoder(request.getUri)
         (qd.getPath, qd)
-      case HttpMethod.POST if (request.getHeader(HttpHeaders.Names.CONTENT_TYPE) == PostParamsType) =>
+      case HttpMethod.POST if (request.headers.get(HttpHeaders.Names.CONTENT_TYPE) == PostParamsType) =>
         (
           request.getUri,
           new QueryStringDecoder("?" + request.getContent.toString(FHttpRequest.UTF_8))
@@ -84,13 +84,13 @@ class OAuth1Filter (scheme: String,
     val key = new SecretKeySpec(normKey.getBytes(FHttpRequest.UTF_8), MAC)
     val mac = Mac.getInstance(MAC)
     mac.init(key)
-    val signature: String = new String( Base64.encodeBase64(mac.doFinal(normReq.getBytes(FHttpRequest.UTF_8))), 
+    val signature: String = new String( Base64.encodeBase64(mac.doFinal(normReq.getBytes(FHttpRequest.UTF_8))),
                                         FHttpRequest.UTF_8)
 
-    oauthParams ::= ("oauth_signature", signature) 
-    
+    oauthParams ::= ("oauth_signature", signature)
+
     // finally, add the header
-    request.addHeader("Authorization", "OAuth " +
+    request.headers.add("Authorization", "OAuth " +
       oauthParams.map(p => p._1 + "=\"" + percentEncode(p._2) + "\"").mkString(","))
 
     service(request)
@@ -98,7 +98,7 @@ class OAuth1Filter (scheme: String,
 
   private def percentEncode(params: List[(String,String)]): List[String] =
     params.map(p => percentEncode(p._1) + "=" + percentEncode(p._2))
-  
+
   private def percentEncode(s: String): String =
     java.net.URLEncoder.encode(s, "utf-8").replace("+", "%20").replace("*", "%2A").replace("%7E", "~")
 }

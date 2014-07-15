@@ -1,9 +1,9 @@
 # Foursquare Finagle Http Library #
 
 [Finagle](https://github.com/twitter/finagle) is a wonderful protocol agnostic communication library.
-Building an http client using finagle is super simple. However, building an http request and
+Building an http client using finagle is simple. However, building an http request and
 parsing the response can ba a chore.
-FHttp is a scala-idiomatic request building interface similar to 
+FHttp is a scala-idiomatic request building interface similar to
 [scalaj-http](https://github.com/scalaj/scalaj-http) for finagle http clients.
 
 Like [scalaj-http](https://github.com/scalaj/scalaj-http), it supports multipart data and oauth1.
@@ -17,9 +17,9 @@ You will probably want to override FHttpClient.service to add your own logging a
 ##[API Docs](http://foursquare.github.com/foursquare-fhttp/api/)##
 
 ## Adding FHttp to your build ##
-The project is cross-compiled for scala 2.9.2 and scala 2.10.2. In your build.sbt, add:
+The project is cross-compiled for scala 2.9.2 and scala 2.10.3. In your build.sbt, add:
 
-    "com.foursquare" %% "foursquare-fhttp" % "0.1.11"
+    "com.foursquare" %% "foursquare-fhttp" % "0.1.12"
 
 
 ## Some Simple Examples ##
@@ -34,7 +34,7 @@ The project is cross-compiled for scala 2.9.2 and scala 2.10.2. In your build.sb
     val clientDefault = new FHttpClient("test", "localhost:80").releaseOnShutdown()
 
     // or customize the ClientBuilder
-    val client = new FHttpClient("test2", "localhost:80", 
+    val client = new FHttpClient("test2", "localhost:80",
         ClientBuilder()
           .codec(Http(_maxRequestSize = 1024.bytes,_maxResponseSize = 1024.bytes))
           .hostConnectionLimit(15)
@@ -60,22 +60,22 @@ The project is cross-compiled for scala 2.9.2 and scala 2.10.2. In your build.sb
     import com.foursquare.fhttp.FHttpRequest._
 
     // Create the singleton client object using a default client spec
-    val client = new FHttpClient("oauth", "term.ie:80")
+    val client = new FHttpClient("oauth", "oauthbin.appspot.com:80")
     val consumer = Token("key", "secret")
-    
+
     // Get the request token
-    val token = client("/oauth/example/request_token").oauth(consumer).get_!(asOAuth1Token)
+    val token = client("/v1/request-token").oauth(consumer).get_!(asOAuth1Token)
 
     // Get the access token
-    val accessToken = client("/oauth/example/access_token").oauth(consumer, token).get_!(asOAuth1Token)
+    val accessToken = client("/v1/access-token").oauth(consumer, token).get_!(asOAuth1Token)
 
     // Try some queries
-    client("/oauth/example/echo_api").params("k1"->"v1", "k2"->"v2").oauth(consumer, accessToken).get_!()
+    client("/v1/echo").params("k1"->"v1", "k2"->"v2").oauth(consumer, accessToken).get_!()
     // res0: String = k1=v1&k2=v2
 
 
 ## Dropbox OAuth Example ##
-Here's a slightly more complicated oauth (and HTTPS) example showing, using a [Dropbox API](https://www.dropbox.com/developers/apps) account.
+Here's a slightly more complicated oauth (and HTTPS) example, using a [Dropbox API](https://www.dropbox.com/developers/apps) account.
 
     import com.foursquare.fhttp._
     import com.foursquare.fhttp.FHttpRequest._
@@ -87,7 +87,7 @@ Here's a slightly more complicated oauth (and HTTPS) example showing, using a [D
     // Using the App key and App Secret, fill out the consumer token here:
     val consumer = Token(dbApiKey, dbApiSecret)
 
-    val api = new FHttpClient("dropbox-api", "api.dropbox.com:443", 
+    val api = new FHttpClient("dropbox-api", "api.dropbox.com:443",
         ClientBuilder()
           .codec(Http())
           .tls("api.dropbox.com")

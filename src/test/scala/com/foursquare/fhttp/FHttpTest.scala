@@ -18,8 +18,8 @@ import scala.collection.JavaConversions._
 
 object FHttpRequestValidators {//extends SpecsMatchers  {
   def matchesHeader(key: String, value: String): FHttpRequest.HttpOption = r => {
-    assertNotNull(r.getHeaders(key))
-    assertEquals(r.getHeaders(key).mkString("|"), value)
+    assertNotNull(r.headers.getAll(key))
+    assertEquals(r.headers.getAll(key).mkString("|"), value)
   }
 
   def matchesContent(content: String, length: Int): FHttpRequest.HttpOption = r => {
@@ -39,7 +39,7 @@ class FHttpTestHelper (serverPort: Int) {//extends SpecsMatchers {
   var responseTransforms: List[FHttpRequest.HttpOption] = Nil
   var requestValidators: List[FHttpRequest.HttpOption] = Nil
   var responseStatus = OK
-  
+
   def reset() = {
     requestValidators = Nil
     responseTransforms = Nil
@@ -52,7 +52,7 @@ class FHttpTestHelper (serverPort: Int) {//extends SpecsMatchers {
     res
   }
 
-  val service: Service[HttpRequest, HttpResponse] = new Service[HttpRequest, HttpResponse] { 
+  val service: Service[HttpRequest, HttpResponse] = new Service[HttpRequest, HttpResponse] {
     def apply(request: HttpRequest) = {
       try {
         requestValidators.foreach(_(request))
@@ -77,16 +77,16 @@ class FHttpTestHelper (serverPort: Int) {//extends SpecsMatchers {
     }
   }
 
-  val address: SocketAddress = new InetSocketAddress("localhost", serverPort)                                  
+  val address: SocketAddress = new InetSocketAddress("localhost", serverPort)
 
-  val server = ServerBuilder()                            
+  val server = ServerBuilder()
     .codec(Http())
     .bindTo(address)
     .name("HttpServer")
     .maxConcurrentRequests(20)
     .build(service)
 
-   
+
 }
 
 object PortHelper {
@@ -141,7 +141,7 @@ class FHttpClientTest {
 
     val req2 = req1.params("this"->"is silly","no"->"you+are")
     assertEquals(req2.uri, expected2)
-    
+
     // params get appended if called again
     val req3 = req2.params("no"->"this_is")
     assertEquals(req3.uri, expected3)
@@ -156,7 +156,7 @@ class FHttpClientTest {
     val req = FHttpRequest(client, "/test").headers("name"->"johng")
     val resErr = req.timeout(5000).get_!()
     resErr isEmpty
-    
+
     // must match both
     helper.requestValidators ::= FHttpRequestValidators.matchesHeader("city", "ny")
     val req2 = req.headers("city"->"ny")
@@ -210,8 +210,8 @@ class FHttpClientTest {
     val json = """ { "some": "json" }"""
     val jsonBytes = json.getBytes(FHttpRequest.UTF_8)
     val part2 = MultiPart("json", "some.json", "application/json", jsonBytes)
-    
-    helper.requestValidators =  
+
+    helper.requestValidators =
       FHttpRequestValidators.containsContent("Content-Disposition: form-data; name=\"hi\"") ::
       FHttpRequestValidators.containsContent("you") ::
       FHttpRequestValidators.containsContent(xml) ::
@@ -224,11 +224,11 @@ class FHttpClientTest {
     assertEquals(reqEmpty, "")
   }
 
-  @Test 
+  @Test
   def testExceptionOnNonOKCode {
     helper.responseStatus = NOT_FOUND
     try {
-      val reqNotFound = FHttpRequest(client, "/notfound").timeout(5000).get_!() 
+      val reqNotFound = FHttpRequest(client, "/notfound").timeout(5000).get_!()
       throw new Exception("wrong code")
     } catch {
       case HttpStatusException(code, reason, response) if (code == NOT_FOUND.getCode) => Unit
@@ -277,7 +277,7 @@ class FHttpClientTest {
       e => throw new Exception(e)
     }
 
-    
+
     //asBytes
     FHttpRequest(client, "/future2").timeout(5000).getFuture(FHttpRequest.asBytes) onSuccess {
       r => r2 = r.length
@@ -314,7 +314,7 @@ class FHttpClientTest {
       val clientOA =
         new FHttpClient(
           "oauth",
-          "term.ie:80",
+          "oauthbin.appspot.com:80",
           (ClientBuilder()
             .codec(Http())
             .hostConnectionLimit(1))
@@ -323,19 +323,19 @@ class FHttpClientTest {
 
       // Get the request token
       val token = {
-        val tkReq = clientOA("/oauth/example/request_token").oauth(consumer)
+        val tkReq = clientOA("/v1/request-token").oauth(consumer)
         if(usePost) tkReq.post_!("", asOAuth1Token) else tkReq.get_!(asOAuth1Token)
       }
 
       // Get the access token
       val accessToken = {
-        val atReq = clientOA("/oauth/example/access_token").oauth(consumer, token)
+        val atReq = clientOA("/v1/access-token").oauth(consumer, token)
         if(usePost) atReq.post_!("", asOAuth1Token) else atReq.get_!(asOAuth1Token)
       }
 
       // Try some queries
       val testParamsRes = {
-        val testReq = clientOA("/oauth/example/echo_api").params("k1"->"v1", "k2"->"v2", "callback" -> "http://example.com/?p1=v1&p2=v2")
+        val testReq = clientOA("/v1/echo").params("k1"->"v1", "k2"->"v2", "callback" -> "http://example.com/?p1=v1&p2=v2")
           .oauth(consumer, accessToken)
         if(usePost) testReq.post_!() else testReq.get_!()
       }

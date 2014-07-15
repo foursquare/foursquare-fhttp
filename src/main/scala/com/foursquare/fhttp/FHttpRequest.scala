@@ -159,7 +159,7 @@ case class FHttpRequest ( client: FHttpClient,
    * @param p The headers to add
    */
   def headers(h: List[(String, String)]): FHttpRequest =
-    option((r: HttpMessage) => h.foreach(kv => r.addHeader(kv._1, kv._2)))
+    option((r: HttpMessage) => h.foreach(kv => r.headers.add(kv._1, kv._2)))
 
   /**
    * Adds a basic http auth header to the request
@@ -190,7 +190,7 @@ case class FHttpRequest ( client: FHttpClient,
   def debug() =
     filter(FHttpRequest.debugFilter)
 
-  /** 
+  /**
    * An approximate representation of the full uri: including scheme, sever, port, and params as a string
    */
   def fullUri: String = {

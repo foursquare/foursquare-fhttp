@@ -32,7 +32,7 @@ class FHttpClient ( val name: String,
   }
 
   // hackazor!
-  def scheme = if (builder.toString.contains("tls=")) "https" else "http"
+  def scheme = if (builder.toString.contains("TLSEngine")) "https" else "http"
 
   val firstHostPort = hostPort.split(",",2)(0)
 
