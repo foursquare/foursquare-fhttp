@@ -1,10 +1,12 @@
 name := "foursquare-fhttp"
 
-version := "0.1.12"
+version := "0.1.13"
 
 organization := "com.foursquare"
 
-crossScalaVersions := Seq("2.9.2", "2.10.3")
+scalaVersion := "2.10.4"
+
+crossScalaVersions := Seq("2.10.4", "2.11.2")
 
 libraryDependencies <++= (scalaVersion) { scalaVersion =>
   val v = scalaVersion match {
@@ -12,7 +14,7 @@ libraryDependencies <++= (scalaVersion) { scalaVersion =>
     case _ => "_" + scalaVersion
   }
   Seq(
-    "com.twitter"                   %  ("finagle-http" + v) % "6.16.0",
+    "com.twitter"                   %  ("finagle-http" + v) % "6.22.0",
     "commons-httpclient"            %  "commons-httpclient" % "3.1",
     "junit"                         %  "junit"              % "4.10"       % "test",
     "com.novocode"                  %  "junit-interface"    % "0.9"        % "test"
