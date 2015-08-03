@@ -14,7 +14,7 @@ libraryDependencies <++= (scalaVersion) { scalaVersion =>
     case _ => "_" + scalaVersion
   }
   Seq(
-    "com.twitter"                   %  ("finagle-http" + v) % "6.22.0",
+    "com.twitter"                   %  ("finagle-http" + v) % "6.16.0",
     "commons-httpclient"            %  "commons-httpclient" % "3.1",
     "junit"                         %  "junit"              % "4.10"       % "test",
     "com.novocode"                  %  "junit-interface"    % "0.9"        % "test"
