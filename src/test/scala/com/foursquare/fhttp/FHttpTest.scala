@@ -358,4 +358,18 @@ class FHttpClientTest {
       .timeout(5000).get_!()
     assertEquals(res, "")
   }
+
+  @Test
+  def testEncodedURLQuery {
+    val expected1 = "/ラーメン"
+    val req1 = client("/ラーメン")
+    val res1 = req1.get_!()
+    assertEquals(res1, "")
+
+    val expected2 = "/%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%B3"
+    val req2 = client("/%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%B3")
+    val res2 = req2.get_!()
+    assertEquals(res2, "")
+  }
+
 }

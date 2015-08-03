@@ -469,9 +469,12 @@ case class FHttpRequest ( client: FHttpClient,
 
   protected def process[T] (method: HttpMethod, processor: Future[HttpResponse] => T): T = {
     val uriObj = new java.net.URI(uri)
-    val req = new DefaultHttpRequest(HttpVersion.HTTP_1_1,
-                                     method,
-                                     uri.substring(uri.indexOf(uriObj.getPath)))
+    val req =
+      new DefaultHttpRequest(
+        HttpVersion.HTTP_1_1,
+        method,
+        uri.substring(uri.indexOf(uriObj.getRawPath))
+      )
     options.reverse.foreach(_(req))
     processor(service(req))
   }
